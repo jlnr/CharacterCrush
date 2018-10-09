@@ -19,6 +19,7 @@
 		D4CFF4DC216C9A4400162394 /* PrettyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CFF4DB216C9A4400162394 /* PrettyButton.swift */; };
 		D4CFF4DE216C9A5A00162394 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CFF4DD216C9A5A00162394 /* SettingsViewController.swift */; };
 		D4CFF4E0216CA09700162394 /* UIColor+CharacterCrush.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CFF4DF216CA09700162394 /* UIColor+CharacterCrush.swift */; };
+		D4CFF4E2216CB2CF00162394 /* HanziDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CFF4E1216CB2CF00162394 /* HanziDatabase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		D4CFF4DB216C9A4400162394 /* PrettyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrettyButton.swift; sourceTree = "<group>"; };
 		D4CFF4DD216C9A5A00162394 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		D4CFF4DF216CA09700162394 /* UIColor+CharacterCrush.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+CharacterCrush.swift"; sourceTree = "<group>"; };
+		D4CFF4E1216CB2CF00162394 /* HanziDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HanziDatabase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,12 +97,13 @@
 				D4CFF4B3216C921C00162394 /* AppDelegate.swift */,
 				D4CFF4B9216C921C00162394 /* GameScene.swift */,
 				D4CFF4BB216C921C00162394 /* GameViewController.swift */,
+				D4CFF4E1216CB2CF00162394 /* HanziDatabase.swift */,
 				D4CFF4DB216C9A4400162394 /* PrettyButton.swift */,
 				D4CFF4DD216C9A5A00162394 /* SettingsViewController.swift */,
+				D4CFF4DF216CA09700162394 /* UIColor+CharacterCrush.swift */,
 				D4CFF4C0216C921D00162394 /* Assets.xcassets */,
 				D4CFF4C2216C921D00162394 /* LaunchScreen.storyboard */,
 				D4CFF4BD216C921C00162394 /* Main.storyboard */,
-				D4CFF4DF216CA09700162394 /* UIColor+CharacterCrush.swift */,
 			);
 			path = CharacterCrush;
 			sourceTree = "<group>";
@@ -222,6 +225,7 @@
 				D4CFF4B4216C921C00162394 /* AppDelegate.swift in Sources */,
 				D4CFF4E0216CA09700162394 /* UIColor+CharacterCrush.swift in Sources */,
 				D4CFF4DC216C9A4400162394 /* PrettyButton.swift in Sources */,
+				D4CFF4E2216CB2CF00162394 /* HanziDatabase.swift in Sources */,
 				D4CFF4DE216C9A5A00162394 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
