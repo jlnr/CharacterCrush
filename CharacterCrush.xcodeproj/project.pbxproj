@@ -20,6 +20,7 @@
 		D4CFF4DE216C9A5A00162394 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CFF4DD216C9A5A00162394 /* SettingsViewController.swift */; };
 		D4CFF4E0216CA09700162394 /* UIColor+CharacterCrush.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CFF4DF216CA09700162394 /* UIColor+CharacterCrush.swift */; };
 		D4CFF4E2216CB2CF00162394 /* HanziDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CFF4E1216CB2CF00162394 /* HanziDatabase.swift */; };
+		D4CFF4E4216D160700162394 /* HanziLevels.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CFF4E3216D160700162394 /* HanziLevels.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,7 @@
 		D4CFF4DD216C9A5A00162394 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		D4CFF4DF216CA09700162394 /* UIColor+CharacterCrush.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+CharacterCrush.swift"; sourceTree = "<group>"; };
 		D4CFF4E1216CB2CF00162394 /* HanziDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HanziDatabase.swift; sourceTree = "<group>"; };
+		D4CFF4E3216D160700162394 /* HanziLevels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HanziLevels.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 				D4CFF4B9216C921C00162394 /* GameScene.swift */,
 				D4CFF4BB216C921C00162394 /* GameViewController.swift */,
 				D4CFF4E1216CB2CF00162394 /* HanziDatabase.swift */,
+				D4CFF4E3216D160700162394 /* HanziLevels.swift */,
 				D4CFF4DB216C9A4400162394 /* PrettyButton.swift */,
 				D4CFF4DD216C9A5A00162394 /* SettingsViewController.swift */,
 				D4CFF4DF216CA09700162394 /* UIColor+CharacterCrush.swift */,
@@ -221,6 +224,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4CFF4BA216C921C00162394 /* GameScene.swift in Sources */,
+				D4CFF4E4216D160700162394 /* HanziLevels.swift in Sources */,
 				D4CFF4BC216C921C00162394 /* GameViewController.swift in Sources */,
 				D4CFF4B4216C921C00162394 /* AppDelegate.swift in Sources */,
 				D4CFF4E0216CA09700162394 /* UIColor+CharacterCrush.swift in Sources */,
