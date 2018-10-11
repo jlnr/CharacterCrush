@@ -60,7 +60,7 @@
                         <viewLayoutGuide key="safeArea" id="hUk-EW-1RC"/>
                     </view>
                     <navigationItem key="navigationItem" title="Character Crush" id="yTB-NX-MXX">
-                        <barButtonItem key="backBarButtonItem" title="Introduction" id="Z1K-g0-bi1"/>
+                        <barButtonItem key="backBarButtonItem" title="Settings" id="Z1K-g0-bi1"/>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="79Y-CC-BOo" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -87,17 +87,32 @@
         <scene sceneID="tXr-a1-R10">
             <objects>
                 <viewController id="BV1-FR-VrT" customClass="GameViewController" customModule="CharacterCrush" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" id="3se-qz-xqx" customClass="SKView">
+                    <view key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" id="3se-qz-xqx">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <skView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MkK-yx-Vbj">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                            </skView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="MkK-yx-Vbj" firstAttribute="trailing" secondItem="4qk-I5-YsI" secondAttribute="trailing" id="6S5-PF-M5x"/>
+                            <constraint firstItem="MkK-yx-Vbj" firstAttribute="top" secondItem="4qk-I5-YsI" secondAttribute="top" id="T7L-AW-jVW"/>
+                            <constraint firstItem="MkK-yx-Vbj" firstAttribute="leading" secondItem="4qk-I5-YsI" secondAttribute="leading" id="bhW-dl-6sh"/>
+                            <constraint firstItem="MkK-yx-Vbj" firstAttribute="bottom" secondItem="4qk-I5-YsI" secondAttribute="bottom" id="mZZ-pH-Zvf"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="4qk-I5-YsI"/>
                     </view>
                     <navigationItem key="navigationItem" title="01:23 left" id="1J0-av-HyN"/>
+                    <connections>
+                        <outlet property="gameView" destination="MkK-yx-Vbj" id="ZbE-LQ-qGJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="107" y="133"/>
+            <point key="canvasLocation" x="105.79710144927537" y="132.58928571428572"/>
         </scene>
     </scenes>
+    <color key="tintColor" red="0.8724826389" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
 </document>

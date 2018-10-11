@@ -72,6 +72,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D42B6946216F64B800D28293 /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				D4CFF4B3216C921C00162394 /* AppDelegate.swift */,
+				D4CFF4BB216C921C00162394 /* GameViewController.swift */,
+				D4CFF4DB216C9A4400162394 /* PrettyButton.swift */,
+				D4CFF4DD216C9A5A00162394 /* SettingsViewController.swift */,
+				D4CFF4DF216CA09700162394 /* UIColor+CharacterCrush.swift */,
+				D4CFF4C2216C921D00162394 /* LaunchScreen.storyboard */,
+				D4CFF4BD216C921C00162394 /* Main.storyboard */,
+			);
+			path = UIKit;
+			sourceTree = "<group>";
+		};
+		D42B6947216F64CD00D28293 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				D4CFF4E1216CB2CF00162394 /* HanziDatabase.swift */,
+				D4CFF4E3216D160700162394 /* HanziLevels.swift */,
+			);
+			path = Database;
+			sourceTree = "<group>";
+		};
+		D42B6948216F64F700D28293 /* SpriteKit */ = {
+			isa = PBXGroup;
+			children = (
+				D4CFF4B7216C921C00162394 /* Actions.sks */,
+				D4CFF4B5216C921C00162394 /* GameScene.sks */,
+				D4CFF4B9216C921C00162394 /* GameScene.swift */,
+			);
+			path = SpriteKit;
+			sourceTree = "<group>";
+		};
 		D4CFF4A7216C921C00162394 = {
 			isa = PBXGroup;
 			children = (
@@ -93,20 +126,11 @@
 		D4CFF4B2216C921C00162394 /* CharacterCrush */ = {
 			isa = PBXGroup;
 			children = (
+				D42B6947216F64CD00D28293 /* Database */,
+				D42B6946216F64B800D28293 /* UIKit */,
+				D42B6948216F64F700D28293 /* SpriteKit */,
 				D4CFF4C5216C921D00162394 /* Info.plist */,
-				D4CFF4B7216C921C00162394 /* Actions.sks */,
-				D4CFF4B5216C921C00162394 /* GameScene.sks */,
-				D4CFF4B3216C921C00162394 /* AppDelegate.swift */,
-				D4CFF4B9216C921C00162394 /* GameScene.swift */,
-				D4CFF4BB216C921C00162394 /* GameViewController.swift */,
-				D4CFF4E1216CB2CF00162394 /* HanziDatabase.swift */,
-				D4CFF4E3216D160700162394 /* HanziLevels.swift */,
-				D4CFF4DB216C9A4400162394 /* PrettyButton.swift */,
-				D4CFF4DD216C9A5A00162394 /* SettingsViewController.swift */,
-				D4CFF4DF216CA09700162394 /* UIColor+CharacterCrush.swift */,
 				D4CFF4C0216C921D00162394 /* Assets.xcassets */,
-				D4CFF4C2216C921D00162394 /* LaunchScreen.storyboard */,
-				D4CFF4BD216C921C00162394 /* Main.storyboard */,
 			);
 			path = CharacterCrush;
 			sourceTree = "<group>";

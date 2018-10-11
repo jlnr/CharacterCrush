@@ -34,10 +34,6 @@ class PrettyButton: UIButton {
         makePretty()
     }
     
-    override func prepareForInterfaceBuilder() {
-        makePretty()
-    }
-    
     func makePretty() {
         titleLabel!.font = UIFont.preferredFont(forTextStyle: .headline)
 
