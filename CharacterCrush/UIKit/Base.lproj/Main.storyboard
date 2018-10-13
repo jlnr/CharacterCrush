@@ -27,18 +27,18 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <skView contentMode="scaleToFill" verticalHuggingPriority="1" translatesAutoresizingMaskIntoConstraints="NO" id="1lU-BX-B0x">
-                                        <rect key="frame" x="0.0" y="76.5" width="382" height="372.5"/>
+                                        <rect key="frame" x="0.0" y="76.5" width="382" height="395.5"/>
                                         <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     </skView>
                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hxc-oK-oLA">
-                                        <rect key="frame" x="0.0" y="461" width="382" height="216"/>
+                                        <rect key="frame" x="0.0" y="484" width="382" height="216"/>
                                         <connections>
-                                            <outlet property="dataSource" destination="lxb-cp-83O" id="zgW-Tm-dt2"/>
-                                            <outlet property="delegate" destination="lxb-cp-83O" id="0oy-km-5Ch"/>
+                                            <outlet property="dataSource" destination="h4R-yW-dUj" id="nTx-bb-IMM"/>
+                                            <outlet property="delegate" destination="h4R-yW-dUj" id="rxu-nz-oPV"/>
                                         </connections>
                                     </pickerView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DgK-LT-LeF" customClass="PrettyButton" customModule="CharacterCrush" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="689" width="382" height="53"/>
+                                        <rect key="frame" x="0.0" y="712" width="382" height="30"/>
                                         <state key="normal" title="Start Game"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isPrimary" value="YES"/>
@@ -63,10 +63,15 @@
                         <barButtonItem key="backBarButtonItem" title="Settings" id="Z1K-g0-bi1"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="pickerView" destination="hxc-oK-oLA" id="FI2-2f-iwY"/>
+                        <outlet property="hanziLevelsPickerController" destination="h4R-yW-dUj" id="kKX-i5-0Au"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="79Y-CC-BOo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="h4R-yW-dUj" customClass="HanziLevelsPickerController" customModule="CharacterCrush" customModuleProvider="target">
+                    <connections>
+                        <outlet property="pickerView" destination="hxc-oK-oLA" id="WlG-IJ-GKM"/>
+                    </connections>
+                </customObject>
             </objects>
             <point key="canvasLocation" x="-771.01449275362324" y="133.25892857142856"/>
         </scene>
