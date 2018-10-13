@@ -14,6 +14,7 @@ struct Category: OptionSet {
     
     static func tiles(column: Int) -> Category {
         assert(column >= 1, "Column numbering starts at 1")
+        assert(column < 32, "SpriteKit only supports 32 categories")
         return Category(rawValue: 1 << column)
     }
     

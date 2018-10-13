@@ -10,11 +10,7 @@ import SpriteKit
 
 class HanziNode: SKSpriteNode {
     
-    private (set) var coordinate: Coordinate
-    
-    init(hanzi: Hanzi, coordinate: Coordinate) {
-        self.coordinate = coordinate
-        
+    init(hanzi: Hanzi, at coordinate: Coordinate) {
         super.init(texture: hanzi.asTexture(), color: .clear,
                    size: CGSize(width: tileSize, height: tileSize))
 
@@ -22,7 +18,7 @@ class HanziNode: SKSpriteNode {
 
         let body = SKPhysicsBody(rectangleOf: self.size)
         body.allowsRotation = false
-        body.restitution = 0.5
+        body.restitution = 0
         body.categoryBitMask = Category.tiles(column: coordinate.column).rawValue
         body.collisionBitMask = Category.floorAndTiles(column: coordinate.column).rawValue
         self.physicsBody = body
@@ -31,5 +27,5 @@ class HanziNode: SKSpriteNode {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
 }

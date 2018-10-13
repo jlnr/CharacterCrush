@@ -11,13 +11,21 @@ import SpriteKit
 class SelectionPath: SKShapeNode {
     
     let touch: UITouch
-    private (set) var coordinates = [Coordinate]()
+    private let grid: TileGrid
+    private var coordinates: [Coordinate]
+    private let bezierPath = UIBezierPath()
     
-    init(touch: UITouch, coordinate: Coordinate) {
+    init(touch: UITouch, from coordinate: Coordinate, grid: TileGrid) {
         self.touch = touch
+        self.grid = grid
+        self.coordinates = [coordinate]
+
         super.init()
         self.strokeColor = .white
-        add(coordinate: coordinate)
+
+        bezierPath.move(to: coordinate.toLocation())
+        self.path = bezierPath.cgPath
+
         self.lineWidth = tileSize * 0.8
         self.lineCap = .round
         self.miterLimit = 2.0
@@ -28,16 +36,20 @@ class SelectionPath: SKShapeNode {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func add(coordinate: Coordinate) {
+    func tryToAdd(coordinate: Coordinate) {
+        guard coordinate.isWithinGrid,
+            !coordinates.contains(coordinate),
+            coordinate.isAdjacent(coordinates.last!) else { return }
+        
         coordinates.append(coordinate)
-        updatePath()
+        bezierPath.addLine(to: coordinate.toLocation())
+        self.path = bezierPath.cgPath
     }
     
-    private func updatePath() {
-        let bezierPath = UIBezierPath()
-        bezierPath.move(to: coordinates[0].toLocation())
-        coordinates.forEach { bezierPath.addLine(to: $0.toLocation()) }
-        self.path = bezierPath.cgPath
+    func tryToClear() {
+        guard coordinates.count >= 3 else { return }
+        
+        grid.removeTiles(coordinates: self.coordinates)
     }
     
 }

@@ -11,8 +11,8 @@ import GameplayKit
 
 class GameScene: SKScene {
     
-    private let level: HanziLevel
-
+    private let grid: TileGrid
+    
     private var selectionPath: SelectionPath? {
         didSet {
             if let oldPath = oldValue {
@@ -25,11 +25,10 @@ class GameScene: SKScene {
     }
     
     init(level: HanziLevel) {
-        self.level = level
-        let width = CGFloat(Coordinate.validColumns.count + 1) * tileSize
-        let height = CGFloat(Coordinate.validRows.count + 1) * tileSize
-        super.init(size: CGSize(width: width, height: height))
-        
+        self.grid = TileGrid(level: level)
+        super.init(size: grid.size)
+        addChild(grid)
+
         scaleMode = .aspectFit
         
         // Let tiles fall down faster.
@@ -38,32 +37,6 @@ class GameScene: SKScene {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func didMove(to view: SKView) {
-        guard children.isEmpty else { return }
-        
-        let floor = SKNode()
-        let floorFrom = CGPoint(x: 0, y: tileSize / 2)
-        let floorTo = CGPoint(x: self.size.width, y: tileSize / 2)
-        floor.physicsBody = SKPhysicsBody(edgeFrom: floorFrom, to: floorTo)
-        floor.physicsBody!.categoryBitMask = Category.floor.rawValue
-        addChild(floor)
-
-        for column in Coordinate.validColumns {
-            for row in Coordinate.validRows {
-                addHanzi(coordinate: Coordinate(column: column, row: row))
-            }
-        }
-    }
-    
-    func addHanzi(coordinate: Coordinate) {
-        let hanzi = level.characters.randomElement()!
-        addChild(HanziNode(hanzi: hanzi, coordinate: coordinate))
-    }
-    
-    override func update(_ currentTime: TimeInterval) {
-        // Called before each frame is rendered
     }
     
 }
@@ -77,8 +50,8 @@ extension GameScene {
         
         for touch in touches {
             let coordinate = Coordinate(closestToLocation: touch.location(in: self))
-            if coordinate.isValid {
-                self.selectionPath = SelectionPath(touch: touch, coordinate: coordinate)
+            if coordinate.isWithinGrid {
+                self.selectionPath = SelectionPath(touch: touch, from: coordinate, grid: grid)
                 return
             }
         }
@@ -88,28 +61,14 @@ extension GameScene {
         guard let selectionPath = selectionPath else { return }
         
         let coordinate = Coordinate(closestToLocation: selectionPath.touch.location(in: self))
-        if coordinate.isValid && !selectionPath.coordinates.contains(coordinate) {
-            selectionPath.add(coordinate: coordinate)
-        }
+        selectionPath.tryToAdd(coordinate: coordinate)
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let selectionPath = selectionPath else { return }
         
-        var tilesPerColumn = [Int: Int]()
-        
         if touches.contains(selectionPath.touch) {
-            selectionPath.coordinates.forEach {
-                self.nodes(at: $0.toLocation()).forEach {
-                    if let hanziNode = $0 as? HanziNode {
-                        hanziNode.removeFromParent()
-                        let column = hanziNode.coordinate.column
-                        tilesPerColumn[column] = (tilesPerColumn[column] ?? 0) + 1
-                        let row = Coordinate.validRows.upperBound + 1 + tilesPerColumn[column]!
-                        addHanzi(coordinate: Coordinate(column: column, row: row))
-                    }
-                }
-            }
+            selectionPath.tryToClear()
             self.selectionPath = nil
         }
     }

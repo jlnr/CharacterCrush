@@ -11,6 +11,10 @@ import UIKit
 struct Coordinate: Equatable, Hashable {
     let column: Int
     let row: Int
+    
+    func isAdjacent(_ coordinate: Coordinate) -> Bool {
+        return abs(row - coordinate.row) <= 1 && abs(column - coordinate.column) <= 1
+    }
 }
 
 // MARK: - Valid and invalid coordinates
@@ -19,7 +23,7 @@ extension Coordinate {
     static let validColumns = 1...8
     static let validRows = 1...9
     
-    var isValid: Bool {
+    var isWithinGrid: Bool {
         return Coordinate.validColumns.contains(column) && Coordinate.validRows.contains(row)
     }
 }

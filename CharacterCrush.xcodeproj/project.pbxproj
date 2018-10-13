@@ -13,6 +13,7 @@
 		D42B695021721C1500D28293 /* SelectionPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42B694F21721C1500D28293 /* SelectionPath.swift */; };
 		D42B69522172228400D28293 /* Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42B69512172228400D28293 /* Coordinate.swift */; };
 		D42B69542172332800D28293 /* HanziLevelsPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42B69532172332800D28293 /* HanziLevelsPickerController.swift */; };
+		D42B695821723E3C00D28293 /* TileGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42B695721723E3C00D28293 /* TileGrid.swift */; };
 		D4CFF4B4216C921C00162394 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CFF4B3216C921C00162394 /* AppDelegate.swift */; };
 		D4CFF4BA216C921C00162394 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CFF4B9216C921C00162394 /* GameScene.swift */; };
 		D4CFF4BC216C921C00162394 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CFF4BB216C921C00162394 /* GameViewController.swift */; };
@@ -44,6 +45,7 @@
 		D42B694F21721C1500D28293 /* SelectionPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionPath.swift; sourceTree = "<group>"; };
 		D42B69512172228400D28293 /* Coordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinate.swift; sourceTree = "<group>"; };
 		D42B69532172332800D28293 /* HanziLevelsPickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HanziLevelsPickerController.swift; sourceTree = "<group>"; };
+		D42B695721723E3C00D28293 /* TileGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileGrid.swift; sourceTree = "<group>"; };
 		D4CFF4B0216C921C00162394 /* CharacterCrush.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CharacterCrush.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4CFF4B3216C921C00162394 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D4CFF4B9216C921C00162394 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 				D42B694B2171EAC300D28293 /* Hanzi+RenderToTexture.swift */,
 				D42B6949216F981600D28293 /* HanziNode.swift */,
 				D42B694F21721C1500D28293 /* SelectionPath.swift */,
+				D42B695721723E3C00D28293 /* TileGrid.swift */,
 			);
 			path = SpriteKit;
 			sourceTree = "<group>";
@@ -263,6 +266,7 @@
 				D4CFF4E4216D160700162394 /* HanziLevels.swift in Sources */,
 				D42B694E2172031300D28293 /* Category.swift in Sources */,
 				D42B694A216F981600D28293 /* HanziNode.swift in Sources */,
+				D42B695821723E3C00D28293 /* TileGrid.swift in Sources */,
 				D42B695021721C1500D28293 /* SelectionPath.swift in Sources */,
 				D4CFF4BC216C921C00162394 /* GameViewController.swift in Sources */,
 				D4CFF4B4216C921C00162394 /* AppDelegate.swift in Sources */,
