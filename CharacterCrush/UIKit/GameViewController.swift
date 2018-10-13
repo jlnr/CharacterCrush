@@ -14,23 +14,18 @@ class GameViewController: UIViewController {
 
     @IBOutlet weak var gameView: SKView!
     
+    lazy var gameScene = GameScene()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Load the SKScene from 'GameScene.sks'
-        if let scene = SKScene(fileNamed: "GameScene") {
-            // Set the scale mode to scale to fit the window
-            scene.scaleMode = .aspectFill
-            
-            // Present the scene
-            gameView.presentScene(scene)
-        }
         
         gameView.ignoresSiblingOrder = true
         #if DEBUG
         gameView.showsFPS = true
         gameView.showsNodeCount = true
         #endif
-    }
 
+        gameView.presentScene(gameScene)
+    }
+    
 }
