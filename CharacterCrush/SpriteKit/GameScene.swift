@@ -11,12 +11,13 @@ import GameplayKit
 
 class GameScene: SKScene {
     
-    let columns = 8
-    let rows = 9
+    private let columns = 8
+    private let rows = 9
+    private let level: HanziLevel
     
-    override init() {
-        let size = CGSize(width: columns, height: rows)
-        super.init(size: size)
+    init(level: HanziLevel) {
+        self.level = level
+        super.init(size: CGSize(width: columns, height: rows))
         
         scaleMode = .aspectFit
         backgroundColor = .white
@@ -29,11 +30,10 @@ class GameScene: SKScene {
     override func didMove(to view: SKView) {
         guard children.isEmpty else { return }
         
-        let dummyHanzi = Hanzi(character: "瓜", pinyinForTones: (nil, nil, nil, nil, nil))
-        
         for x in 0..<columns {
             for y in 0..<rows {
-                let node = HanziNode(hanzi: dummyHanzi)
+                let hanzi = level.characters.randomElement()!
+                let node = HanziNode(hanzi: hanzi)
                 node.position = CGPoint(x: x, y: y)
                 addChild(node)
             }

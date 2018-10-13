@@ -10,14 +10,31 @@ import UIKit
 
 class SettingsViewController: UIViewController {
     
+    @IBOutlet weak var pickerView: UIPickerView!
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.destination {
+        case let gameViewController as GameViewController:
+            gameViewController.level = self.selectedLevel
+        default:
+            super.prepare(for: segue, sender: sender)
+        }
+    }
+    
 }
 
 // MARK: - Connect UIPicker to difficulty levels defined in HanziLevels.swift
 
 extension SettingsViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     
-    enum PickerComponent: Int, CaseIterable {
+    private enum PickerComponent: Int, CaseIterable {
         case source = 0, level
+    }
+    
+    private var selectedLevel: HanziLevel {
+        let source = pickerView.selectedRow(inComponent: PickerComponent.source.rawValue)
+        let level  = pickerView.selectedRow(inComponent: PickerComponent.level.rawValue)
+        return hanziSources[source].levels[level]
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {

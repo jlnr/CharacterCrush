@@ -14,7 +14,7 @@ class GameViewController: UIViewController {
 
     @IBOutlet weak var gameView: SKView!
     
-    lazy var gameScene = GameScene()
+    var level: HanziLevel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +25,7 @@ class GameViewController: UIViewController {
         gameView.showsNodeCount = true
         #endif
 
-        gameView.presentScene(gameScene)
+        gameView.presentScene(GameScene(level: level))
     }
     
 }

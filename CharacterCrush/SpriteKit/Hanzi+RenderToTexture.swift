@@ -10,13 +10,13 @@ import UIKit
 import SpriteKit
 
 fileprivate func renderToTexture(size: CGSize, block: () throws -> ()) rethrows -> SKTexture {
-    UIGraphicsBeginImageContextWithOptions(size, false, 1.0)
+    UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
     defer { UIGraphicsEndImageContext() }
     try block();
     return SKTexture(image: UIGraphicsGetImageFromCurrentImageContext()!)
 }
 
-fileprivate let hanziTextureSize: CGFloat = 128
+fileprivate let hanziTextureSize: CGFloat = 64
 
 fileprivate let textAttributes: [NSAttributedString.Key: Any] = [
     .font: UIFont.systemFont(ofSize: hanziTextureSize * 0.9),

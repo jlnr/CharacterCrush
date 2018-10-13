@@ -62,6 +62,9 @@
                     <navigationItem key="navigationItem" title="Character Crush" id="yTB-NX-MXX">
                         <barButtonItem key="backBarButtonItem" title="Settings" id="Z1K-g0-bi1"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="pickerView" destination="hxc-oK-oLA" id="FI2-2f-iwY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="79Y-CC-BOo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
