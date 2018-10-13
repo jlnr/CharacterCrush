@@ -12,8 +12,12 @@ class HanziNode: SKSpriteNode {
     
     static let size: CGFloat = 1000
     
+    private (set) var column: Int
+    
     init(hanzi: Hanzi, column: Int) {
         assert(column >= 1, "Column numbering starts at 1")
+        
+        self.column = column
         
         super.init(texture: hanzi.asTexture(),
                    color: .clear,

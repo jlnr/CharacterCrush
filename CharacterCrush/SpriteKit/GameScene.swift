@@ -43,13 +43,20 @@ class GameScene: SKScene {
 
         for x in 1...columns {
             for y in 1...rows {
-                let hanzi = level.characters.randomElement()!
-                let node = HanziNode(hanzi: hanzi, column: x)
-                node.position = CGPoint(x: CGFloat(x) * HanziNode.size,
-                                        y: CGFloat(y) * HanziNode.size)
-                addChild(node)
+                addHanzi(column: x, row: y)
             }
         }
+    }
+    
+    func addHanzi(column: Int, row: Int) {
+        let hanzi = level.characters.randomElement()!
+        let node = HanziNode(hanzi: hanzi, column: column)
+
+        let x = CGFloat(column) * HanziNode.size
+        let y = CGFloat(row) * HanziNode.size
+        node.position = CGPoint(x: x, y: y)
+
+        addChild(node)
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -65,7 +72,12 @@ extension GameScene {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
             let nodes = self.nodes(at: touch.location(in: self))
-            nodes.forEach { $0.removeFromParent() }
+            nodes.forEach {
+                if let hanziNode = $0 as? HanziNode {
+                    hanziNode.removeFromParent()
+                    addHanzi(column: hanziNode.column, row: rows + 2)
+                }
+            }
         }
     }
     
