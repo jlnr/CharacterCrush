@@ -11,14 +11,24 @@ import GameplayKit
 
 class GameScene: SKScene {
     
-    private let columns = 8
-    private let rows = 9
     private let level: HanziLevel
+
+    private var selectionPath: SelectionPath? {
+        didSet {
+            if let oldPath = oldValue {
+                oldPath.removeFromParent()
+            }
+            if let newPath = selectionPath {
+                self.addChild(newPath)
+            }
+        }
+    }
     
     init(level: HanziLevel) {
         self.level = level
-        super.init(size: CGSize(width: CGFloat(columns + 1) * HanziNode.size,
-                                height: CGFloat(rows + 1) * HanziNode.size))
+        let width = CGFloat(Coordinate.validColumns.count + 1) * tileSize
+        let height = CGFloat(Coordinate.validRows.count + 1) * tileSize
+        super.init(size: CGSize(width: width, height: height))
         
         scaleMode = .aspectFit
         
@@ -34,29 +44,22 @@ class GameScene: SKScene {
         guard children.isEmpty else { return }
         
         let floor = SKNode()
-        floor.position = CGPoint(x: self.size.width / 2, y: 0)
-        let floorSize = CGSize(width: self.size.width, height: HanziNode.size)
-        floor.physicsBody = SKPhysicsBody(rectangleOf: floorSize)
-        floor.physicsBody!.isDynamic = false
+        let floorFrom = CGPoint(x: 0, y: tileSize / 2)
+        let floorTo = CGPoint(x: self.size.width, y: tileSize / 2)
+        floor.physicsBody = SKPhysicsBody(edgeFrom: floorFrom, to: floorTo)
         floor.physicsBody!.categoryBitMask = Category.floor.rawValue
         addChild(floor)
 
-        for x in 1...columns {
-            for y in 1...rows {
-                addHanzi(column: x, row: y)
+        for column in Coordinate.validColumns {
+            for row in Coordinate.validRows {
+                addHanzi(coordinate: Coordinate(column: column, row: row))
             }
         }
     }
     
-    func addHanzi(column: Int, row: Int) {
+    func addHanzi(coordinate: Coordinate) {
         let hanzi = level.characters.randomElement()!
-        let node = HanziNode(hanzi: hanzi, column: column)
-
-        let x = CGFloat(column) * HanziNode.size
-        let y = CGFloat(row) * HanziNode.size
-        node.position = CGPoint(x: x, y: y)
-
-        addChild(node)
+        addChild(HanziNode(hanzi: hanzi, coordinate: coordinate))
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -70,24 +73,53 @@ class GameScene: SKScene {
 extension GameScene {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard selectionPath == nil else { return }
+        
         for touch in touches {
-            let nodes = self.nodes(at: touch.location(in: self))
-            nodes.forEach {
-                if let hanziNode = $0 as? HanziNode {
-                    hanziNode.removeFromParent()
-                    addHanzi(column: hanziNode.column, row: rows + 2)
-                }
+            let coordinate = Coordinate(closestToLocation: touch.location(in: self))
+            if coordinate.isValid {
+                self.selectionPath = SelectionPath(touch: touch, coordinate: coordinate)
+                return
             }
         }
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let selectionPath = selectionPath else { return }
+        
+        let coordinate = Coordinate(closestToLocation: selectionPath.touch.location(in: self))
+        if coordinate.isValid && !selectionPath.coordinates.contains(coordinate) {
+            selectionPath.add(coordinate: coordinate)
+        }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let selectionPath = selectionPath else { return }
+        
+        var tilesPerColumn = [Int: Int]()
+        
+        if touches.contains(selectionPath.touch) {
+            selectionPath.coordinates.forEach {
+                self.nodes(at: $0.toLocation()).forEach {
+                    if let hanziNode = $0 as? HanziNode {
+                        hanziNode.removeFromParent()
+                        let column = hanziNode.coordinate.column
+                        tilesPerColumn[column] = (tilesPerColumn[column] ?? 0) + 1
+                        let row = Coordinate.validRows.upperBound + 1 + tilesPerColumn[column]!
+                        addHanzi(coordinate: Coordinate(column: column, row: row))
+                    }
+                }
+            }
+            self.selectionPath = nil
+        }
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let selectionPath = selectionPath else { return }
+
+        if touches.contains(selectionPath.touch) {
+            self.selectionPath = nil
+        }
     }
     
 }

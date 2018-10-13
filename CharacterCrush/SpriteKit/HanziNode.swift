@@ -10,24 +10,22 @@ import SpriteKit
 
 class HanziNode: SKSpriteNode {
     
-    static let size: CGFloat = 1000
+    private (set) var coordinate: Coordinate
     
-    private (set) var column: Int
-    
-    init(hanzi: Hanzi, column: Int) {
-        assert(column >= 1, "Column numbering starts at 1")
+    init(hanzi: Hanzi, coordinate: Coordinate) {
+        self.coordinate = coordinate
         
-        self.column = column
-        
-        super.init(texture: hanzi.asTexture(),
-                   color: .clear,
-                   size: CGSize(width: HanziNode.size, height: HanziNode.size))
-        
-        self.physicsBody = SKPhysicsBody(rectangleOf: self.size)
-        self.physicsBody!.allowsRotation = false
-        self.physicsBody!.restitution = 0.5
-        self.physicsBody!.categoryBitMask = Category.tiles(column: column).rawValue
-        self.physicsBody!.collisionBitMask = Category.floorAndTiles(column: column).rawValue
+        super.init(texture: hanzi.asTexture(), color: .clear,
+                   size: CGSize(width: tileSize, height: tileSize))
+
+        self.position = coordinate.toLocation()
+
+        let body = SKPhysicsBody(rectangleOf: self.size)
+        body.allowsRotation = false
+        body.restitution = 0.5
+        body.categoryBitMask = Category.tiles(column: coordinate.column).rawValue
+        body.collisionBitMask = Category.floorAndTiles(column: coordinate.column).rawValue
+        self.physicsBody = body
     }
     
     required init?(coder aDecoder: NSCoder) {
