@@ -49,7 +49,7 @@ class SelectionPath: SKShapeNode {
     func tryToClear() {
         guard coordinates.count >= 3 else { return }
         
-        grid.removeTiles(coordinates: self.coordinates)
+        grid.removeTiles(at: self.coordinates)
     }
     
 }

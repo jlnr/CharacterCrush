@@ -15,6 +15,8 @@ class TileGrid: SKNode {
     let size = CGSize(width: CGFloat(Coordinate.validColumns.count + 1) * tileSize,
                       height: CGFloat(Coordinate.validRows.count + 1) * tileSize)
     
+    private var coordinateToTile = [Coordinate: HanziNode]()
+    
     init(level: HanziLevel) {
         self.level = level
         
@@ -27,37 +29,72 @@ class TileGrid: SKNode {
         floor.physicsBody!.categoryBitMask = Category.floor.rawValue
         addChild(floor)
         
-        for column in Coordinate.validColumns {
-            for row in Coordinate.validRows {
-                addTile(at: Coordinate(column: column, row: row))
-            }
-        }
+        refillGrid(fromAbove: false)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func addTile(at coordinate: Coordinate) {
+    private func addTile(at coordinate: Coordinate) -> HanziNode {
         let hanzi = level.characters.randomElement()!
-        addChild(HanziNode(hanzi: hanzi, at: coordinate))
+        let tile = HanziNode(hanzi: hanzi, at: coordinate)
+        addChild(tile)
+        return tile
     }
     
-    func removeTiles(coordinates: [Coordinate]) {
-        var tilesPerColumn = [Int: Int]()
+    func removeTiles(at coordinates: [Coordinate]) {
+        assert(coordinateToTile.count == Coordinate.validColumns.count * Coordinate.validRows.count,
+               "TileGrid must be completely filled before removing tiles")
         
         for coordinate in coordinates {
-            for node in self.nodes(at: coordinate.toLocation()) {
-                if let hanziNode = node as? HanziNode {
-                    hanziNode.removeFromParent()
-                    let column = coordinate.column
-                    tilesPerColumn[column] = (tilesPerColumn[column] ?? 0) + 1
-                    let row = Coordinate.validRows.upperBound + 1 + tilesPerColumn[column]!
-                    addTile(at: Coordinate(column: column, row: row))
+            let node = coordinateToTile.removeValue(forKey: coordinate)
+            node!.removeFromParent()
+        }
+        updateCoordinates()
+        refillGrid(fromAbove: true)
+    }
+    
+    private func updateCoordinates() {
+        for column in Coordinate.validColumns {
+            for row in Coordinate.validRows {
+                let coordinate = Coordinate(column: column, row: row)
+                if coordinateToTile[coordinate] == nil {
+                    coordinateToTile[coordinate] = popTile(above: coordinate)
                 }
             }
         }
-
+    }
+    
+    private func popTile(above coordinate: Coordinate) -> HanziNode? {
+        guard coordinate.row < Coordinate.validRows.upperBound else { return nil }
+        
+        for row in (coordinate.row + 1)...Coordinate.validRows.upperBound {
+            let coordinate = Coordinate(column: coordinate.column, row: row)
+            if let tile = coordinateToTile.removeValue(forKey: coordinate) {
+                return tile
+            }
+        }
+        return nil
+    }
+    
+    private func refillGrid(fromAbove: Bool) {
+        for column in Coordinate.validColumns {
+            var newTilesInColumn = 0
+            
+            for row in Coordinate.validRows {
+                let coordinate = Coordinate(column: column, row: row)
+                if coordinateToTile[coordinate] == nil {
+                    let tile = addTile(at: Coordinate(column: column, row: row))
+                    coordinateToTile[coordinate] = tile
+                    if fromAbove {
+                        let row = Coordinate.validRows.upperBound + 2 + newTilesInColumn
+                        tile.position = Coordinate(column: column, row: row).toLocation()
+                        newTilesInColumn += 1
+                    }
+                }
+            }
+        }
     }
     
 }
