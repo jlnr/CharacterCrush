@@ -23,6 +23,7 @@ class GameViewController: UIViewController {
         #if DEBUG
         gameView.showsFPS = true
         gameView.showsNodeCount = true
+        gameView.showsPhysics = true
         #endif
 
         gameView.presentScene(GameScene(level: level))

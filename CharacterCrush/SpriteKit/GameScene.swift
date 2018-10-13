@@ -17,10 +17,13 @@ class GameScene: SKScene {
     
     init(level: HanziLevel) {
         self.level = level
-        super.init(size: CGSize(width: columns, height: rows))
+        super.init(size: CGSize(width: CGFloat(columns + 1) * HanziNode.size,
+                                height: CGFloat(rows + 1) * HanziNode.size))
         
         scaleMode = .aspectFit
-        backgroundColor = .white
+        
+        // Let tiles fall down faster.
+        physicsWorld.gravity.dy *= 10
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -30,17 +33,40 @@ class GameScene: SKScene {
     override func didMove(to view: SKView) {
         guard children.isEmpty else { return }
         
-        for x in 0..<columns {
-            for y in 0..<rows {
+        let floor = SKNode()
+        floor.position = CGPoint(x: self.size.width / 2, y: 0)
+        let floorSize = CGSize(width: self.size.width, height: HanziNode.size)
+        floor.physicsBody = SKPhysicsBody(rectangleOf: floorSize)
+        floor.physicsBody!.isDynamic = false
+        floor.physicsBody!.categoryBitMask = Category.floor.rawValue
+        addChild(floor)
+
+        for x in 1...columns {
+            for y in 1...rows {
                 let hanzi = level.characters.randomElement()!
-                let node = HanziNode(hanzi: hanzi)
-                node.position = CGPoint(x: x, y: y)
+                let node = HanziNode(hanzi: hanzi, column: x)
+                node.position = CGPoint(x: CGFloat(x) * HanziNode.size,
+                                        y: CGFloat(y) * HanziNode.size)
                 addChild(node)
             }
         }
     }
     
+    override func update(_ currentTime: TimeInterval) {
+        // Called before each frame is rendered
+    }
+    
+}
+
+// MARK: - Touch handling
+
+extension GameScene {
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for touch in touches {
+            let nodes = self.nodes(at: touch.location(in: self))
+            nodes.forEach { $0.removeFromParent() }
+        }
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -50,10 +76,6 @@ class GameScene: SKScene {
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-    }
-    
-    override func update(_ currentTime: TimeInterval) {
-        // Called before each frame is rendered
     }
     
 }
