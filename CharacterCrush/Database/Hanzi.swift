@@ -19,7 +19,7 @@ struct Hanzi {
 }
 
 extension Hanzi {
-    struct Tones: OptionSet {
+    struct Tones: OptionSet, Hashable {
         let rawValue: Int
         
         static let first  = Tones(rawValue: 1 << 0)

@@ -37,4 +37,37 @@ extension Hanzi {
         }
     }
     
+    fileprivate static let toneTextures = [Tones: SKTexture]()
+    
+    fileprivate static let toneColors: [Tones: UIColor] = [
+        .first:  UIColor(red: 227/255.0, green: 0, blue: 0, alpha: 1),
+        .second: UIColor(red: 2/255.0, green: 179/255.0, blue: 28/255.0, alpha: 1),
+        .third:  UIColor(red: 21/255.0, green: 16/255.0, blue: 240/255.0, alpha: 1),
+        .fourth: UIColor(red: 137/255.0, green: 0, blue: 191/255.0, alpha: 1),
+    ]
+    
+    static func texture(forTones tones: Tones) -> SKTexture {
+        if let texture = toneTextures[tones] {
+            return texture
+        }
+        
+        var colors = [UIColor]()
+        for tone in [Tones.first, Tones.second, Tones.third, Tones.fourth] {
+            if tones.contains(tone) {
+                colors.append(toneColors[tone]!)
+            }
+        }
+        
+        let rows = 24
+        
+        let texture = renderToTexture(size: CGSize(width: 1, height: rows)) {
+            for row in 0..<rows {
+                colors[row % colors.count].setFill()
+                UIRectFill(CGRect(x: 0, y: row, width: 1, height: 1))
+            }
+        }
+        texture.filteringMode = .nearest
+        return texture
+    }
+    
 }

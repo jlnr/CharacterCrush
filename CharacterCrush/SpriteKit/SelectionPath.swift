@@ -10,6 +10,8 @@ import SpriteKit
 
 let minimumLengthToClear = 2
 
+// MARK: - SelectionPath logic
+
 class SelectionPath: SKShapeNode {
     
     let touch: UITouch
@@ -30,14 +32,10 @@ class SelectionPath: SKShapeNode {
         self.coordinates = [coordinate]
     
         super.init()
-        self.strokeColor = .white
 
-        self.path = self.bezierPath.cgPath
-
-        self.lineWidth = tileSize * 0.8
-        self.lineCap = .round
-        self.miterLimit = 2.0
         self.zPosition = -1
+        
+        updateAppearance()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -63,12 +61,12 @@ class SelectionPath: SKShapeNode {
         }
         
         coordinates.append(coordinate)
-        self.path = self.bezierPath.cgPath
+        updateAppearance()
     }
     
     private func backtrack() {
         coordinates.removeLast()
-        self.path = self.bezierPath.cgPath
+        updateAppearance()
     }
     
     func tryToClear() -> Bool {
@@ -85,14 +83,27 @@ class SelectionPath: SKShapeNode {
         }
         return tones
     }
-    
-    private var bezierPath: UIBezierPath {
-        let path = UIBezierPath()
-        path.move(to: coordinates.first!.toLocation())
-        for coordinate in coordinates.suffix(from: 1) {
-            path.addLine(to: coordinate.toLocation())
-        }
-        return path
-    }
+}
 
+// MARK: - SelectionPath appearance
+
+extension SelectionPath {
+    
+    private func updateAppearance() {
+        self.lineWidth = coordinates.count == 1 ? tileSize * 1.5 : tileSize * 0.8
+        self.lineCap = .round
+        self.miterLimit = 2.0
+        self.strokeTexture = Hanzi.texture(forTones: possibleTones)
+        updateBezierPath()
+    }
+    
+    private func updateBezierPath() {
+        let bezierPath = UIBezierPath()
+        bezierPath.move(to: coordinates.first!.toLocation())
+        for coordinate in coordinates.suffix(from: 1) {
+            bezierPath.addLine(to: coordinate.toLocation())
+        }
+        self.path = bezierPath.cgPath
+    }
+    
 }
