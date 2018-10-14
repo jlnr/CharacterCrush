@@ -27,7 +27,7 @@ fileprivate let jokerTextShadow: NSShadow = {
     let shadow = NSShadow()
     shadow.shadowBlurRadius = 4
     shadow.shadowColor = UIColor.black
-    shadow.shadowOffset = .zero
+    shadow.shadowOffset = CGSize(width: 0, height: 1)
     return shadow
 }()
 
@@ -38,10 +38,10 @@ fileprivate let jokerTextAttributes: [NSAttributedString.Key: Any] = [
 ]
 
 extension Hanzi {
-
+    
     func asTexture() -> SKTexture {
         let size = CGSize(width: hanziTextureSize, height: hanziTextureSize)
-
+        
         return renderToTexture(size: size) {
             let string = String(self.character) as NSString
             let attributes = isJoker ? jokerTextAttributes : textAttributes
@@ -78,10 +78,12 @@ extension Hanzi.Tones {
             }
         }
         
-        let texture = renderToTexture(size: CGSize(width: 1, height: colors.count)) {
-            for row in 0..<colors.count {
-                colors[row % colors.count].setFill()
-                UIRectFill(CGRect(x: 0, y: row, width: 1, height: 1))
+        let scale = 32
+        
+        let texture = renderToTexture(size: CGSize(width: 1, height: colors.count * scale)) {
+            for index in 0..<colors.count {
+                colors[index % colors.count].setFill()
+                UIRectFill(CGRect(x: 0, y: index * scale, width: 1, height: scale))
             }
         }
         texture.filteringMode = .nearest
