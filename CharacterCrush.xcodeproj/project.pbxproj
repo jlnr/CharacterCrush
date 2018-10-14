@@ -46,6 +46,7 @@
 		D42B69512172228400D28293 /* Coordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinate.swift; sourceTree = "<group>"; };
 		D42B69532172332800D28293 /* HanziLevelsPickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HanziLevelsPickerController.swift; sourceTree = "<group>"; };
 		D42B695721723E3C00D28293 /* TileGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileGrid.swift; sourceTree = "<group>"; };
+		D42B695B21734D6500D28293 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D4CFF4B0216C921C00162394 /* CharacterCrush.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CharacterCrush.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4CFF4B3216C921C00162394 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D4CFF4B9216C921C00162394 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -123,6 +124,7 @@
 		D4CFF4A7216C921C00162394 = {
 			isa = PBXGroup;
 			children = (
+				D42B695B21734D6500D28293 /* README.md */,
 				D4CFF4B2216C921C00162394 /* CharacterCrush */,
 				D4CFF4CD216C921D00162394 /* CharacterCrushTests */,
 				D4CFF4B1216C921C00162394 /* Products */,
