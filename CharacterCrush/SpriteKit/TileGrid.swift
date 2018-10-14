@@ -17,6 +17,13 @@ class TileGrid: SKNode {
     
     private var coordinateToTile = [Coordinate: HanziTile]()
     
+    private var lastTileDroppedAt = Date()
+    
+    var needsPhysics: Bool {
+        let maxTileDropTime: TimeInterval = 2.5
+        return Date().timeIntervalSince(lastTileDroppedAt) < maxTileDropTime
+    }
+    
     init(level: HanziLevel) {
         self.level = level
         
@@ -98,6 +105,8 @@ class TileGrid: SKNode {
     }
     
     private func addTile(dropFrom coordinate: Coordinate) -> HanziTile {
+        lastTileDroppedAt = Date()
+        
         let hanzi = level.characters.randomElement()!
         let tile = HanziTile(hanzi: hanzi, at: coordinate)
         addChild(tile)

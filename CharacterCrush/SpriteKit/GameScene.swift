@@ -65,6 +65,11 @@ class GameScene: SKScene {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func didFinishUpdate() {
+        super.didFinishUpdate()
+        physicsWorld.speed = grid.needsPhysics ? 1.0 : 0.0
+    }
+    
     // MARK: - Text-to-speech
     
     var isMuted = false
