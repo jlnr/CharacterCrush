@@ -65,17 +65,21 @@ fileprivate let toneColors: [Hanzi.Tones: UIColor] = [
 
 extension Hanzi.Tones {
     
-    func matchingBackgroundTexture() -> SKTexture {
-        if let texture = toneTextures[self] {
-            return texture
-        }
-        
+    func matchingBackground() -> (UIColor, SKTexture?) {
         var colors = [UIColor]()
         let allTones: [Hanzi.Tones] = [.first, .second, .third, .fourth]
         for tone in allTones {
             if self.contains(tone) {
                 colors.append(toneColors[tone]!)
             }
+        }
+        
+        if colors.count == 1 {
+            return (colors.first!, nil)
+        }
+        
+        if let texture = toneTextures[self] {
+            return (colors.first!, texture)
         }
         
         let scale = 32
@@ -87,7 +91,7 @@ extension Hanzi.Tones {
             }
         }
         texture.filteringMode = .nearest
-        return texture
+        return (colors.first!, texture)
     }
 
 }

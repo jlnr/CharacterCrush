@@ -98,7 +98,7 @@ extension SelectionPath {
         }
         self.lineCap = .round
         self.lineJoin = .round
-        self.strokeTexture = possibleTones.matchingBackgroundTexture()
+        (self.strokeColor, self.strokeTexture) = possibleTones.matchingBackground()
         updateBezierPath()
     }
     

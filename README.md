@@ -5,17 +5,23 @@
 This is my app prototype for the [ChinesePod app challenge](https://chinesepod.app).
 The app has not been released on the App Store yet.
 
+![Demo](Assets/Demo.gif)
+
 Character Crush is a puzzle game with mechanics similar to popular mobile games e.g. [Cookie Cats](https://www.youtube.com/watch?v=iPxZIp0cbJE&t=1m10s).
 However, instead of connecting 3+ items of the same color, the player must connect 2+ Chinese characters with the same *tone*.
 
+![Connecting Tiles](Assets/Connecting.gif)
+
 Selected characters are highlighted using [tone-specific colors](https://chinesepod.com/blog/2017/04/17/learn-chinese-tones-properly/) (see item 4, this game follows Pleco's color scheme).
-Characters with multiple tones (破音字) such as 好 work like jokers, and can be used in a chain of either of their tones.
+Characters with multiple tones (破音字) such as 好 (hǎo / hào) work like jokers, and can be used in a chain of either of their tones.
 
-## How to Run This Project
+## How to Play This Game
 
-This app is written using the Swift language and Apple's own SpriteKit frameworks, and it uses no third-party dependencies.
+This prototype is written using the Swift language and Apple's own SpriteKit frameworks, and it uses no third-party dependencies.
 
-Simple download or clone this repository, open `CharacterCrush.pbxproj`, and run the game on an iPhone or iPad of your choice.
+Simply download or clone this repository, open `CharacterCrush.pbxproj`, and run the game on an iPhone or iPad of your choice.
+
+Note that some effects (based on SpriteKit/Metal) do not work in the iPhone/iPad simulator.
 
 ## Possible Integration with ChinesePod
 
@@ -43,4 +49,4 @@ There is always more to do. Here are a few ideas that didn't make it in time:
 
 Unlike most of of my other repositories, this code is *not* provided under a permissive license.
 
-Copyright (C) 2018 Julian Raschke. All rights reserved.
+Copyright © 2018 Julian Raschke. All rights reserved.
