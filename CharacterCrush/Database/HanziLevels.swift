@@ -8,6 +8,7 @@
 
 struct HanziLevel {
     let title: String
+    let voiceLanguage: String
     let characters: [Hanzi]
 }
 
@@ -22,20 +23,20 @@ fileprivate func weightedLevels(_ levels: [Hanzi]...) -> [Hanzi] {
 }
 
 fileprivate let hskLevels = [
-    HanziLevel(title: "1", characters: weightedLevels(hsk1)),
-    HanziLevel(title: "2", characters: weightedLevels(hsk1, hsk2)),
-    HanziLevel(title: "3", characters: weightedLevels(hsk1, hsk2, hsk3)),
-    HanziLevel(title: "4", characters: weightedLevels(hsk1, hsk2, hsk3, hsk4)),
-    HanziLevel(title: "5", characters: weightedLevels(hsk1, hsk2, hsk3, hsk4, hsk5)),
-    HanziLevel(title: "6", characters: weightedLevels(hsk1, hsk2, hsk3, hsk4, hsk5, hsk6)),
+    HanziLevel(title: "1", voiceLanguage: "zh-CN", characters: weightedLevels(hsk1)),
+    HanziLevel(title: "2", voiceLanguage: "zh-CN", characters: weightedLevels(hsk1, hsk2)),
+    HanziLevel(title: "3", voiceLanguage: "zh-CN", characters: weightedLevels(hsk1, hsk2, hsk3)),
+    HanziLevel(title: "4", voiceLanguage: "zh-CN", characters: weightedLevels(hsk1, hsk2, hsk3, hsk4)),
+    HanziLevel(title: "5", voiceLanguage: "zh-CN", characters: weightedLevels(hsk1, hsk2, hsk3, hsk4, hsk5)),
+    HanziLevel(title: "6", voiceLanguage: "zh-CN", characters: weightedLevels(hsk1, hsk2, hsk3, hsk4, hsk5, hsk6)),
 ]
 
 fileprivate let tocflLevel = [
-    HanziLevel(title: "入門級", characters: weightedLevels(tocfl1)),
-    HanziLevel(title: "基礎級", characters: weightedLevels(tocfl1, tocfl2)),
-    HanziLevel(title: "進階級", characters: weightedLevels(tocfl1, tocfl2, tocfl3)),
-    HanziLevel(title: "高階級", characters: weightedLevels(tocfl1, tocfl2, tocfl3, tocfl4)),
-    HanziLevel(title: "流利級", characters: weightedLevels(tocfl1, tocfl2, tocfl3, tocfl4, tocfl5)),
+    HanziLevel(title: "入門級", voiceLanguage: "zh-TW", characters: weightedLevels(tocfl1)),
+    HanziLevel(title: "基礎級", voiceLanguage: "zh-TW", characters: weightedLevels(tocfl1, tocfl2)),
+    HanziLevel(title: "進階級", voiceLanguage: "zh-TW", characters: weightedLevels(tocfl1, tocfl2, tocfl3)),
+    HanziLevel(title: "高階級", voiceLanguage: "zh-TW", characters: weightedLevels(tocfl1, tocfl2, tocfl3, tocfl4)),
+    HanziLevel(title: "流利級", voiceLanguage: "zh-TW", characters: weightedLevels(tocfl1, tocfl2, tocfl3, tocfl4, tocfl5)),
 ]
 
 struct HanziSource {

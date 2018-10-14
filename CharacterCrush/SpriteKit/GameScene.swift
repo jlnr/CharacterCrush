@@ -7,7 +7,7 @@
 //
 
 import SpriteKit
-import GameplayKit
+import AVKit
 
 class GameScene: SKScene {
     
@@ -26,7 +26,13 @@ class GameScene: SKScene {
         }
     }
     
+    private let synthesizer: AVSpeechSynthesizer?
+    private let voice: AVSpeechSynthesisVoice?
+    
     init(level: HanziLevel, delegate: SKSceneDelegate) {
+        self.voice = AVSpeechSynthesisVoice(language: level.voiceLanguage)
+        self.synthesizer = self.voice == nil ? nil : AVSpeechSynthesizer()
+        
         self.grid = TileGrid(level: level)
         super.init(size: grid.size)
         addChild(grid)
@@ -43,6 +49,15 @@ class GameScene: SKScene {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func pronounceCharacter(_ character: Character) {
+        guard let synthesizer = synthesizer, !synthesizer.isSpeaking else { return }
+        
+        // Try speaking this character using Apple's text-to-speech engine.
+        let utterance = AVSpeechUtterance(string: String(character))
+        utterance.voice = voice
+        synthesizer.speak(utterance)
+    }
+    
 }
 
 // MARK: - Touch handling
@@ -56,6 +71,7 @@ extension GameScene {
             let coordinate = Coordinate(closestToLocation: touch.location(in: self))
             if coordinate.isWithinGrid {
                 self.selectionPath = SelectionPath(touch: touch, from: coordinate, grid: grid)
+                pronounceCharacter(grid[coordinate]!.hanzi.character)
                 return
             }
         }
@@ -65,7 +81,11 @@ extension GameScene {
         guard let selectionPath = selectionPath else { return }
         
         let coordinate = Coordinate(closestToLocation: selectionPath.touch.location(in: self))
-        selectionPath.extendOrBacktrack(to: coordinate)
+        if selectionPath.tryToExtend(to: coordinate) {
+            pronounceCharacter(grid[coordinate]!.hanzi.character)
+        } else {
+            selectionPath.tryToBacktrack(to: coordinate)
+        }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {

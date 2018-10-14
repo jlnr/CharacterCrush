@@ -49,7 +49,7 @@ class GameViewController: UIViewController, SKSceneDelegate {
         }
         
         let alertController = UIAlertController(title: "Game Over",
-                                                message: "Score: \(self.scene.score)",
+                                                message: "Time's up! Your score: \(self.scene.score). Not bad!",
                                                 preferredStyle: .alert)
         alertController.addAction(okAction)
         self.present(alertController, animated: true, completion: nil)

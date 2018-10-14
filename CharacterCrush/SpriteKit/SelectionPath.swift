@@ -42,29 +42,25 @@ class SelectionPath: SKShapeNode {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func extendOrBacktrack(to coordinate: Coordinate) {
-        if coordinates.count > 1 && coordinates[coordinates.count - 2] == coordinate {
-            backtrack()
-        } else {
-            tryToExtend(to: coordinate)
-        }
-    }
-    
-    private func tryToExtend(to coordinate: Coordinate) {
+    func tryToExtend(to coordinate: Coordinate) -> Bool {
         guard coordinate.isWithinGrid,
             !coordinates.contains(coordinate),
-            coordinate.isAdjacent(coordinates.last!) else { return }
+            coordinate.isAdjacent(coordinates.last!) else { return false }
         
         let sharedTones = grid[coordinate]!.hanzi.sharedTones(tones: self.possibleTones)
         if sharedTones == [] {
-            return
+            return false
         }
         
         coordinates.append(coordinate)
         updateAppearance()
+        return true
     }
     
-    private func backtrack() {
+    func tryToBacktrack(to coordinate: Coordinate) {
+        guard coordinates.count > 1,
+            coordinates[coordinates.count - 2] == coordinate else { return }
+        
         coordinates.removeLast()
         updateAppearance()
     }
