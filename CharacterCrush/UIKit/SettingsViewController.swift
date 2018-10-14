@@ -15,6 +15,7 @@ class SettingsViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.destination {
         case let gameViewController as GameViewController:
+            gameViewController.source = hanziLevelsPickerController.selectedSource
             gameViewController.level = hanziLevelsPickerController.selectedLevel
         default:
             super.prepare(for: segue, sender: sender)

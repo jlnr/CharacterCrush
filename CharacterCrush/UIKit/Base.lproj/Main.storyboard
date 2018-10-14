@@ -6,6 +6,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -100,26 +101,51 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <skView contentMode="scaleToFill" allowsTransparency="YES" ignoresSiblingOrder="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MkK-yx-Vbj">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <rect key="frame" x="0.0" y="143.5" width="414" height="718.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </skView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Mlr-PV-Acn">
+                                <rect key="frame" x="20" y="103" width="374" height="20.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Level: HSK 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oq9-p0-rH1">
+                                        <rect key="frame" x="0.0" y="0.0" width="94.5" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score: 45" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y2L-Ei-6cs">
+                                        <rect key="frame" x="299.5" y="0.0" width="74.5" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="MkK-yx-Vbj" firstAttribute="trailing" secondItem="4qk-I5-YsI" secondAttribute="trailing" id="6S5-PF-M5x"/>
-                            <constraint firstItem="MkK-yx-Vbj" firstAttribute="top" secondItem="4qk-I5-YsI" secondAttribute="top" id="T7L-AW-jVW"/>
+                            <constraint firstItem="Mlr-PV-Acn" firstAttribute="leading" secondItem="4qk-I5-YsI" secondAttribute="leading" constant="20" id="AuF-xn-8d2"/>
                             <constraint firstItem="MkK-yx-Vbj" firstAttribute="leading" secondItem="4qk-I5-YsI" secondAttribute="leading" id="bhW-dl-6sh"/>
+                            <constraint firstItem="MkK-yx-Vbj" firstAttribute="top" secondItem="Mlr-PV-Acn" secondAttribute="bottom" constant="20" id="gYz-eD-Iyx"/>
                             <constraint firstItem="MkK-yx-Vbj" firstAttribute="bottom" secondItem="4qk-I5-YsI" secondAttribute="bottom" id="mZZ-pH-Zvf"/>
+                            <constraint firstItem="Mlr-PV-Acn" firstAttribute="top" secondItem="4qk-I5-YsI" secondAttribute="top" constant="15" id="uzo-FY-Hg7"/>
+                            <constraint firstItem="4qk-I5-YsI" firstAttribute="trailing" secondItem="Mlr-PV-Acn" secondAttribute="trailing" constant="20" id="zg4-Y4-5kx"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="4qk-I5-YsI"/>
                     </view>
                     <navigationItem key="navigationItem" title="01:23 left" id="1J0-av-HyN">
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Score: 45" id="Gmu-0l-tm1">
+                        <barButtonItem key="rightBarButtonItem" title="🔈" id="Gmu-0l-tm1">
                             <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <connections>
+                                <action selector="toggleMute:" destination="BV1-FR-VrT" id="FLP-uX-r7b"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="gameView" destination="MkK-yx-Vbj" id="ZbE-LQ-qGJ"/>
+                        <outlet property="levelLabel" destination="Oq9-p0-rH1" id="Kc7-2H-p79"/>
+                        <outlet property="scoreLabel" destination="Y2L-Ei-6cs" id="qhU-lp-B2P"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>

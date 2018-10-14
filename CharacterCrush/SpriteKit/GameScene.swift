@@ -21,36 +21,59 @@ class GameScene: SKScene {
                 oldPath.removeFromParent()
             }
             if let newPath = selectionPath {
-                self.addChild(newPath)
+                addChild(newPath)
             }
         }
     }
     
-    private let synthesizer: AVSpeechSynthesizer?
-    private let voice: AVSpeechSynthesisVoice?
-    
-    init(level: HanziLevel, delegate: SKSceneDelegate) {
-        self.voice = AVSpeechSynthesisVoice(language: level.voiceLanguage)
+    init(source: HanziSource, level: HanziLevel, delegate: SKSceneDelegate) {
+        self.voice = AVSpeechSynthesisVoice(language: source.voiceLanguage)
         self.synthesizer = self.voice == nil ? nil : AVSpeechSynthesizer()
         
         self.grid = TileGrid(level: level)
         super.init(size: grid.size)
         addChild(grid)
-
+        
         self.delegate = delegate
 
-        scaleMode = .aspectFit
+        scaleMode = .aspectFill
+        backgroundColor = .white
         
         // Let tiles fall down faster.
         physicsWorld.gravity.dy *= 10
+    }
+    
+    func optimize(forSize size: CGSize) {
+        let viewAspectRatio = size.width / size.height
+        let gridAspectRatio = grid.size.width / grid.size.height
+        
+        self.size = grid.size
+        self.anchorPoint = .zero
+        
+        if viewAspectRatio > gridAspectRatio {
+            // Make the scene wider to match view's aspect ratio.
+            self.size.width *= (viewAspectRatio / gridAspectRatio)
+            self.anchorPoint.x = (self.size.width - grid.size.width) / 2 / self.size.width
+        } else {
+            // Make the scene taller to match view's aspect ratio.
+            self.size.height *= (gridAspectRatio / viewAspectRatio)
+            self.anchorPoint.y = (self.size.height - grid.size.height) / 2 / self.size.height
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Text-to-speech
+    
+    var isMuted = false
+    
+    private let synthesizer: AVSpeechSynthesizer?
+    private let voice: AVSpeechSynthesisVoice?
+    
     func pronounceCharacter(_ character: Character) {
-        guard let synthesizer = synthesizer, !synthesizer.isSpeaking else { return }
+        guard !isMuted, let synthesizer = synthesizer, !synthesizer.isSpeaking else { return }
         
         // Try speaking this character using Apple's text-to-speech engine.
         let utterance = AVSpeechUtterance(string: String(character))

@@ -16,12 +16,11 @@ class HanziLevelsPickerController: NSObject, UIPickerViewDataSource, UIPickerVie
         case source, level
     }
 
-    // TODO: Save and restore selected level from NSUserDefaults.
-    private var selectedSource = 0
+    var selectedSource = hanziSources[0]
     
     var selectedLevel: HanziLevel {
         let level = pickerView.selectedRow(inComponent: PickerComponent.level.rawValue)
-        return hanziSources[selectedSource].levels[level]
+        return selectedSource.levels[level]
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -33,7 +32,7 @@ class HanziLevelsPickerController: NSObject, UIPickerViewDataSource, UIPickerVie
         case .source:
             return hanziSources.count
         case .level:
-            return hanziSources[selectedSource].levels.count
+            return selectedSource.levels.count
         }
     }
     
@@ -42,14 +41,14 @@ class HanziLevelsPickerController: NSObject, UIPickerViewDataSource, UIPickerVie
         case .source:
             return hanziSources[row].title
         case .level:
-            return hanziSources[selectedSource].levels[row].title
+            return selectedSource.levels[row].title
         }
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         switch PickerComponent(rawValue: component)! {
         case .source:
-            selectedSource = row
+            selectedSource = hanziSources[row]
             pickerView.reloadComponent(PickerComponent.level.rawValue)
         case .level:
             // TODO: Update live demo running in SKView above.
