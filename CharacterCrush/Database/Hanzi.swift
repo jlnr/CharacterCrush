@@ -46,4 +46,21 @@ extension Hanzi {
         }
         return sharedTones
     }
+    
+    var isJoker: Bool {
+        var tones = 0
+        if firstTone != nil {
+            tones += 1
+        }
+        if secondTone != nil {
+            tones += 1
+        }
+        if thirdTone != nil {
+            tones += 1
+        }
+        if fourthTone != nil {
+            tones += 1
+        }
+        return tones >= 2
+    }
 }

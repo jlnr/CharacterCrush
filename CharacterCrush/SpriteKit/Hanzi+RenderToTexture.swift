@@ -23,6 +23,19 @@ fileprivate let textAttributes: [NSAttributedString.Key: Any] = [
     .foregroundColor: UIColor.black,
 ]
 
+fileprivate let jokerTextShadow: NSShadow = {
+    let shadow = NSShadow()
+    shadow.shadowBlurRadius = 4
+    shadow.shadowColor = UIColor.black
+    shadow.shadowOffset = .zero
+    return shadow
+}()
+
+fileprivate let jokerTextAttributes = textAttributes.merging([
+    .shadow: jokerTextShadow,
+    .foregroundColor: UIColor.yellow,
+]) { (old, new) in new }
+
 extension Hanzi {
 
     func asTexture() -> SKTexture {
@@ -30,30 +43,36 @@ extension Hanzi {
 
         return renderToTexture(size: size) {
             let string = String(self.character) as NSString
-            let size = string.boundingRect(with: size, attributes: textAttributes, context: nil).size
+            let attributes = isJoker ? jokerTextAttributes : textAttributes
+            let size = string.boundingRect(with: size, attributes: attributes, context: nil).size
             let origin = CGPoint(x: (hanziTextureSize - size.width) / 2,
                                  y: (hanziTextureSize - size.height) / 2)
-            string.draw(at: origin, withAttributes: textAttributes)
+            string.draw(at: origin, withAttributes: attributes)
         }
     }
     
-    fileprivate static let toneTextures = [Tones: SKTexture]()
+}
+
+fileprivate let toneTextures = [Hanzi.Tones: SKTexture]()
+
+fileprivate let toneColors: [Hanzi.Tones: UIColor] = [
+    .first:  UIColor(red: 227/255.0, green: 0, blue: 0, alpha: 1),
+    .second: UIColor(red: 2/255.0, green: 179/255.0, blue: 28/255.0, alpha: 1),
+    .third:  UIColor(red: 21/255.0, green: 16/255.0, blue: 240/255.0, alpha: 1),
+    .fourth: UIColor(red: 137/255.0, green: 0, blue: 191/255.0, alpha: 1),
+]
+
+extension Hanzi.Tones {
     
-    fileprivate static let toneColors: [Tones: UIColor] = [
-        .first:  UIColor(red: 227/255.0, green: 0, blue: 0, alpha: 1),
-        .second: UIColor(red: 2/255.0, green: 179/255.0, blue: 28/255.0, alpha: 1),
-        .third:  UIColor(red: 21/255.0, green: 16/255.0, blue: 240/255.0, alpha: 1),
-        .fourth: UIColor(red: 137/255.0, green: 0, blue: 191/255.0, alpha: 1),
-    ]
-    
-    static func texture(forTones tones: Tones) -> SKTexture {
-        if let texture = toneTextures[tones] {
+    func matchingBackgroundTexture() -> SKTexture {
+        if let texture = toneTextures[self] {
             return texture
         }
         
         var colors = [UIColor]()
-        for tone in [Tones.first, Tones.second, Tones.third, Tones.fourth] {
-            if tones.contains(tone) {
+        let allTones: [Hanzi.Tones] = [.first, .second, .third, .fourth]
+        for tone in allTones {
+            if self.contains(tone) {
                 colors.append(toneColors[tone]!)
             }
         }
@@ -69,5 +88,5 @@ extension Hanzi {
         texture.filteringMode = .nearest
         return texture
     }
-    
+
 }

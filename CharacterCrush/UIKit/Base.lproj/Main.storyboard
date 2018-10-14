@@ -21,25 +21,26 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="hS7-iq-S04">
                                 <rect key="frame" x="16" y="104" width="382" height="742"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe adjacent characters that have the same tone to remove them. New characters will fall down from the top." textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ewd-gw-iNN">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ewd-gw-iNN">
                                         <rect key="frame" x="0.0" y="0.0" width="382" height="64.5"/>
+                                        <string key="text">Connect two or more adjacent characters with the same tone to clear them. The more characters you connect, the higher your score.</string>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <skView contentMode="scaleToFill" verticalHuggingPriority="1" translatesAutoresizingMaskIntoConstraints="NO" id="1lU-BX-B0x">
-                                        <rect key="frame" x="0.0" y="76.5" width="382" height="395.5"/>
+                                        <rect key="frame" x="0.0" y="76.5" width="382" height="372.5"/>
                                         <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     </skView>
                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hxc-oK-oLA">
-                                        <rect key="frame" x="0.0" y="484" width="382" height="216"/>
+                                        <rect key="frame" x="0.0" y="461" width="382" height="216"/>
                                         <connections>
                                             <outlet property="dataSource" destination="h4R-yW-dUj" id="nTx-bb-IMM"/>
                                             <outlet property="delegate" destination="h4R-yW-dUj" id="rxu-nz-oPV"/>
                                         </connections>
                                     </pickerView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DgK-LT-LeF" customClass="PrettyButton" customModule="CharacterCrush" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="712" width="382" height="30"/>
+                                        <rect key="frame" x="0.0" y="689" width="382" height="53"/>
                                         <state key="normal" title="Start Game"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isPrimary" value="YES"/>

@@ -88,8 +88,8 @@ extension SelectionPath {
     private func updateAppearance() {
         self.lineWidth = coordinates.count == 1 ? tileSize * 1.5 : tileSize * 0.8
         self.lineCap = .round
-        self.miterLimit = 2.0
-        self.strokeTexture = Hanzi.texture(forTones: possibleTones)
+        self.lineJoin = .round
+        self.strokeTexture = possibleTones.matchingBackgroundTexture()
         updateBezierPath()
     }
     
