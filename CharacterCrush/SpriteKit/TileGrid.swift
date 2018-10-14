@@ -15,7 +15,7 @@ class TileGrid: SKNode {
     let size = CGSize(width: CGFloat(Coordinate.validColumns.count + 1) * tileSize,
                       height: CGFloat(Coordinate.validRows.count + 1) * tileSize)
     
-    private var coordinateToTile = [Coordinate: HanziNode]()
+    private var coordinateToTile = [Coordinate: HanziTile]()
     
     init(level: HanziLevel) {
         self.level = level
@@ -36,9 +36,18 @@ class TileGrid: SKNode {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func addTile(at coordinate: Coordinate) -> HanziNode {
+    private (set) subscript(coordinate: Coordinate) -> HanziTile? {
+        get {
+            return coordinateToTile[coordinate]
+        }
+        set(newValue) {
+            coordinateToTile[coordinate] = newValue
+        }
+    }
+    
+    private func addTile(at coordinate: Coordinate) -> HanziTile {
         let hanzi = level.characters.randomElement()!
-        let tile = HanziNode(hanzi: hanzi, at: coordinate)
+        let tile = HanziTile(hanzi: hanzi, at: coordinate)
         addChild(tile)
         return tile
     }
@@ -48,8 +57,8 @@ class TileGrid: SKNode {
                "TileGrid must be completely filled before removing tiles")
         
         for coordinate in coordinates {
-            let node = coordinateToTile.removeValue(forKey: coordinate)
-            node!.removeFromParent()
+            self[coordinate]!.removeFromParent()
+            self[coordinate] = nil
         }
         updateCoordinates()
         refillGrid(fromAbove: true)
@@ -59,19 +68,20 @@ class TileGrid: SKNode {
         for column in Coordinate.validColumns {
             for row in Coordinate.validRows {
                 let coordinate = Coordinate(column: column, row: row)
-                if coordinateToTile[coordinate] == nil {
-                    coordinateToTile[coordinate] = popTile(above: coordinate)
+                if self[coordinate] == nil {
+                    self[coordinate] = popTile(above: coordinate)
                 }
             }
         }
     }
     
-    private func popTile(above coordinate: Coordinate) -> HanziNode? {
+    private func popTile(above coordinate: Coordinate) -> HanziTile? {
         guard coordinate.row < Coordinate.validRows.upperBound else { return nil }
         
         for row in (coordinate.row + 1)...Coordinate.validRows.upperBound {
             let coordinate = Coordinate(column: coordinate.column, row: row)
-            if let tile = coordinateToTile.removeValue(forKey: coordinate) {
+            if let tile = self[coordinate] {
+                self[coordinate] = nil
                 return tile
             }
         }
@@ -84,9 +94,9 @@ class TileGrid: SKNode {
             
             for row in Coordinate.validRows {
                 let coordinate = Coordinate(column: column, row: row)
-                if coordinateToTile[coordinate] == nil {
+                if self[coordinate] == nil {
                     let tile = addTile(at: Coordinate(column: column, row: row))
-                    coordinateToTile[coordinate] = tile
+                    self[coordinate] = tile
                     if fromAbove {
                         let row = Coordinate.validRows.upperBound + 2 + newTilesInColumn
                         tile.position = Coordinate(column: column, row: row).toLocation()

@@ -20,7 +20,7 @@ fileprivate let hanziTextureSize: CGFloat = 64
 
 fileprivate let textAttributes: [NSAttributedString.Key: Any] = [
     .font: UIFont.systemFont(ofSize: hanziTextureSize * 0.9),
-    .foregroundColor: UIColor.black,
+    .foregroundColor: UIColor.white,
 ]
 
 extension Hanzi {

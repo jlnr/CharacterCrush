@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D42B694A216F981600D28293 /* HanziNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42B6949216F981600D28293 /* HanziNode.swift */; };
+		D42B694A216F981600D28293 /* HanziTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42B6949216F981600D28293 /* HanziTile.swift */; };
 		D42B694C2171EAC300D28293 /* Hanzi+RenderToTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42B694B2171EAC300D28293 /* Hanzi+RenderToTexture.swift */; };
 		D42B694E2172031300D28293 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42B694D2172031300D28293 /* Category.swift */; };
 		D42B695021721C1500D28293 /* SelectionPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42B694F21721C1500D28293 /* SelectionPath.swift */; };
@@ -39,7 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		D42B6949216F981600D28293 /* HanziNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HanziNode.swift; sourceTree = "<group>"; };
+		D42B6949216F981600D28293 /* HanziTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HanziTile.swift; sourceTree = "<group>"; };
 		D42B694B2171EAC300D28293 /* Hanzi+RenderToTexture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Hanzi+RenderToTexture.swift"; sourceTree = "<group>"; };
 		D42B694D2172031300D28293 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		D42B694F21721C1500D28293 /* SelectionPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionPath.swift; sourceTree = "<group>"; };
@@ -113,7 +113,7 @@
 				D42B69512172228400D28293 /* Coordinate.swift */,
 				D4CFF4B9216C921C00162394 /* GameScene.swift */,
 				D42B694B2171EAC300D28293 /* Hanzi+RenderToTexture.swift */,
-				D42B6949216F981600D28293 /* HanziNode.swift */,
+				D42B6949216F981600D28293 /* HanziTile.swift */,
 				D42B694F21721C1500D28293 /* SelectionPath.swift */,
 				D42B695721723E3C00D28293 /* TileGrid.swift */,
 			);
@@ -265,7 +265,7 @@
 				D42B69542172332800D28293 /* HanziLevelsPickerController.swift in Sources */,
 				D4CFF4E4216D160700162394 /* HanziLevels.swift in Sources */,
 				D42B694E2172031300D28293 /* Category.swift in Sources */,
-				D42B694A216F981600D28293 /* HanziNode.swift in Sources */,
+				D42B694A216F981600D28293 /* HanziTile.swift in Sources */,
 				D42B695821723E3C00D28293 /* TileGrid.swift in Sources */,
 				D42B695021721C1500D28293 /* SelectionPath.swift in Sources */,
 				D4CFF4BC216C921C00162394 /* GameViewController.swift in Sources */,
@@ -437,6 +437,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 95FA22JKUY;
 				INFOPLIST_FILE = CharacterCrush/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -454,6 +455,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 95FA22JKUY;
 				INFOPLIST_FILE = CharacterCrush/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

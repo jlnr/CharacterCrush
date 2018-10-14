@@ -1,5 +1,5 @@
 //
-//  HanziNode.swift
+//  HanziTile.swift
 //  CharacterCrush
 //
 //  Created by Julian Raschke on 11.10.18.
@@ -8,9 +8,13 @@
 
 import SpriteKit
 
-class HanziNode: SKSpriteNode {
+class HanziTile: SKSpriteNode {
+    
+    let hanzi: Hanzi
     
     init(hanzi: Hanzi, at coordinate: Coordinate) {
+        self.hanzi = hanzi
+        
         super.init(texture: hanzi.asTexture(), color: .clear,
                    size: CGSize(width: tileSize, height: tileSize))
 
