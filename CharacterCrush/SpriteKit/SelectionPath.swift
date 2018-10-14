@@ -14,22 +14,25 @@ class SelectionPath: SKShapeNode {
     
     let touch: UITouch
     
+    var score: Int {
+        // This is 1 when the bare minimum was cleared, and more otherwise.
+        let baseScore = coordinates.count - minimumLengthToClear + 1
+        // 1, 3, 6, 10, 15 ...
+        return baseScore * (baseScore + 1) / 2
+    }
+    
     private let grid: TileGrid
     private var coordinates: [Coordinate]
-    private var possibleTones: Hanzi.Tones
-    private let bezierPath = UIBezierPath()
     
     init(touch: UITouch, from coordinate: Coordinate, grid: TileGrid) {
         self.touch = touch
         self.grid = grid
         self.coordinates = [coordinate]
-        self.possibleTones = grid[coordinate]!.hanzi.sharedTones(tones: .all)
-
+    
         super.init()
         self.strokeColor = .white
 
-        bezierPath.move(to: coordinate.toLocation())
-        self.path = bezierPath.cgPath
+        self.path = self.bezierPath.cgPath
 
         self.lineWidth = tileSize * 0.8
         self.lineCap = .round
@@ -41,7 +44,15 @@ class SelectionPath: SKShapeNode {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func tryToAdd(coordinate: Coordinate) {
+    func extendOrBacktrack(to coordinate: Coordinate) {
+        if coordinates.count > 1 && coordinates[coordinates.count - 2] == coordinate {
+            backtrack()
+        } else {
+            tryToExtend(to: coordinate)
+        }
+    }
+    
+    private func tryToExtend(to coordinate: Coordinate) {
         guard coordinate.isWithinGrid,
             !coordinates.contains(coordinate),
             coordinate.isAdjacent(coordinates.last!) else { return }
@@ -50,11 +61,14 @@ class SelectionPath: SKShapeNode {
         if sharedTones == [] {
             return
         }
-        self.possibleTones = sharedTones
         
         coordinates.append(coordinate)
-        bezierPath.addLine(to: coordinate.toLocation())
-        self.path = bezierPath.cgPath
+        self.path = self.bezierPath.cgPath
+    }
+    
+    private func backtrack() {
+        coordinates.removeLast()
+        self.path = self.bezierPath.cgPath
     }
     
     func tryToClear() -> Bool {
@@ -64,11 +78,21 @@ class SelectionPath: SKShapeNode {
         return true
     }
     
-    var score: Int {
-        // This is 1 when the bare minimum was cleared, and more otherwise.
-        let baseScore = coordinates.count - minimumLengthToClear + 1
-        // 1, 3, 6, 10, 15 ...
-        return baseScore * (baseScore + 1) / 2
+    private var possibleTones: Hanzi.Tones {
+        var tones = Hanzi.Tones.all
+        for coordinate in coordinates {
+            tones = grid[coordinate]!.hanzi.sharedTones(tones: tones)
+        }
+        return tones
     }
     
+    private var bezierPath: UIBezierPath {
+        let path = UIBezierPath()
+        path.move(to: coordinates.first!.toLocation())
+        for coordinate in coordinates.suffix(from: 1) {
+            path.addLine(to: coordinate.toLocation())
+        }
+        return path
+    }
+
 }

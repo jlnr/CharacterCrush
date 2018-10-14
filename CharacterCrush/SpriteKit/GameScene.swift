@@ -65,7 +65,7 @@ extension GameScene {
         guard let selectionPath = selectionPath else { return }
         
         let coordinate = Coordinate(closestToLocation: selectionPath.touch.location(in: self))
-        selectionPath.tryToAdd(coordinate: coordinate)
+        selectionPath.extendOrBacktrack(to: coordinate)
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
