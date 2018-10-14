@@ -68,10 +68,27 @@ class GameViewController: UIViewController, SKSceneDelegate {
         }
         
         let alertController = UIAlertController(title: "Game Over",
-                                                message: "Time's up! Your score: \(self.scene.score). Not bad!",
+                                                message: gameOverMessage,
                                                 preferredStyle: .alert)
         alertController.addAction(okAction)
         self.present(alertController, animated: true, completion: nil)
+    }
+    
+    private var gameOverMessage: String {
+        return "Time's up! Your score: \(self.scene.score).\n\(encouragement)"
+    }
+    
+    private var encouragement: String {
+        switch scene.score {
+        case 0..<10:
+            return "Don't give up!"
+        case 10..<40:
+            return "Not bad."
+        case 40..<100:
+            return "Very good!"
+        default:
+            return "Impressive!"
+        }
     }
     
 }
