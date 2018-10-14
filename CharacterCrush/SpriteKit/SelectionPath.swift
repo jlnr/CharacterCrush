@@ -10,19 +10,19 @@ import SpriteKit
 
 class SelectionPath: SKShapeNode {
     
+    private let minimumLengthToClear = 2
+    
     let touch: UITouch
     private let grid: TileGrid
     private var coordinates: [Coordinate]
+    private var possibleTones: Hanzi.Tones
     private let bezierPath = UIBezierPath()
-    private var possibleTones: (Bool, Bool, Bool, Bool, Bool)
     
     init(touch: UITouch, from coordinate: Coordinate, grid: TileGrid) {
         self.touch = touch
         self.grid = grid
         self.coordinates = [coordinate]
-
-        let tones = grid[coordinate]!.hanzi.pinyinForTones
-        self.possibleTones = (tones.0 != nil, tones.1 != nil, tones.2 != nil, tones.3 != nil, tones.4 != nil)
+        self.possibleTones = grid[coordinate]!.hanzi.sharedTones(tones: .all)
 
         super.init()
         self.strokeColor = .white
@@ -45,18 +45,11 @@ class SelectionPath: SKShapeNode {
             !coordinates.contains(coordinate),
             coordinate.isAdjacent(coordinates.last!) else { return }
         
-        let tones = grid[coordinate]!.hanzi.pinyinForTones
-        let toneIntersection = (
-            (possibleTones.0 && tones.0 != nil),
-            (possibleTones.1 && tones.1 != nil),
-            (possibleTones.2 && tones.2 != nil),
-            (possibleTones.3 && tones.3 != nil),
-            (possibleTones.4 && tones.4 != nil)
-        )
-        if toneIntersection == (false, false, false, false, false) {
+        let sharedTones = grid[coordinate]!.hanzi.sharedTones(tones: self.possibleTones)
+        if sharedTones == [] {
             return
         }
-        self.possibleTones = toneIntersection
+        self.possibleTones = sharedTones
         
         coordinates.append(coordinate)
         bezierPath.addLine(to: coordinate.toLocation())
@@ -64,7 +57,7 @@ class SelectionPath: SKShapeNode {
     }
     
     func tryToClear() {
-        guard coordinates.count >= 3 else { return }
+        guard coordinates.count >= minimumLengthToClear else { return }
         
         grid.removeTiles(at: self.coordinates)
     }

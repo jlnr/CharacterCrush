@@ -20,8 +20,8 @@ struct Coordinate: Equatable, Hashable {
 // MARK: - Valid and invalid coordinates
 
 extension Coordinate {
-    static let validColumns = 1...8
-    static let validRows = 1...9
+    static let validColumns = 1...7
+    static let validRows = 1...10
     
     var isWithinGrid: Bool {
         return Coordinate.validColumns.contains(column) && Coordinate.validRows.contains(row)
