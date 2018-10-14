@@ -8,11 +8,12 @@
 
 import SpriteKit
 
+let minimumLengthToClear = 2
+
 class SelectionPath: SKShapeNode {
     
-    private let minimumLengthToClear = 2
-    
     let touch: UITouch
+    
     private let grid: TileGrid
     private var coordinates: [Coordinate]
     private var possibleTones: Hanzi.Tones
@@ -56,10 +57,18 @@ class SelectionPath: SKShapeNode {
         self.path = bezierPath.cgPath
     }
     
-    func tryToClear() {
-        guard coordinates.count >= minimumLengthToClear else { return }
+    func tryToClear() -> Bool {
+        guard coordinates.count >= minimumLengthToClear else { return false }
         
         grid.removeTiles(at: self.coordinates)
+        return true
+    }
+    
+    var score: Int {
+        // This is 1 when the bare minimum was cleared, and more otherwise.
+        let baseScore = coordinates.count - minimumLengthToClear + 1
+        // 1, 3, 6, 10, 15 ...
+        return baseScore * (baseScore + 1) / 2
     }
     
 }

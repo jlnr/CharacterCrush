@@ -27,18 +27,18 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <skView contentMode="scaleToFill" verticalHuggingPriority="1" translatesAutoresizingMaskIntoConstraints="NO" id="1lU-BX-B0x">
-                                        <rect key="frame" x="0.0" y="76.5" width="382" height="395.5"/>
+                                        <rect key="frame" x="0.0" y="76.5" width="382" height="372.5"/>
                                         <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     </skView>
                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hxc-oK-oLA">
-                                        <rect key="frame" x="0.0" y="484" width="382" height="216"/>
+                                        <rect key="frame" x="0.0" y="461" width="382" height="216"/>
                                         <connections>
                                             <outlet property="dataSource" destination="h4R-yW-dUj" id="nTx-bb-IMM"/>
                                             <outlet property="delegate" destination="h4R-yW-dUj" id="rxu-nz-oPV"/>
                                         </connections>
                                     </pickerView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DgK-LT-LeF" customClass="PrettyButton" customModule="CharacterCrush" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="712" width="382" height="30"/>
+                                        <rect key="frame" x="0.0" y="689" width="382" height="53"/>
                                         <state key="normal" title="Start Game"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isPrimary" value="YES"/>
@@ -113,7 +113,11 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="4qk-I5-YsI"/>
                     </view>
-                    <navigationItem key="navigationItem" title="01:23 left" id="1J0-av-HyN"/>
+                    <navigationItem key="navigationItem" title="01:23 left" id="1J0-av-HyN">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Score: 45" id="Gmu-0l-tm1">
+                            <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="gameView" destination="MkK-yx-Vbj" id="ZbE-LQ-qGJ"/>
                     </connections>

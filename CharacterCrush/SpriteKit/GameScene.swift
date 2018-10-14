@@ -11,6 +11,8 @@ import GameplayKit
 
 class GameScene: SKScene {
     
+    private (set) var score = 0
+    
     private let grid: TileGrid
     
     private var selectionPath: SelectionPath? {
@@ -24,10 +26,12 @@ class GameScene: SKScene {
         }
     }
     
-    init(level: HanziLevel) {
+    init(level: HanziLevel, delegate: SKSceneDelegate) {
         self.grid = TileGrid(level: level)
         super.init(size: grid.size)
         addChild(grid)
+
+        self.delegate = delegate
 
         scaleMode = .aspectFit
         
@@ -68,7 +72,9 @@ extension GameScene {
         guard let selectionPath = selectionPath else { return }
         
         if touches.contains(selectionPath.touch) {
-            selectionPath.tryToClear()
+            if selectionPath.tryToClear() {
+                self.score += selectionPath.score
+            }
             self.selectionPath = nil
         }
     }
