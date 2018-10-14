@@ -36,6 +36,13 @@ class GameViewController: UIViewController, SKSceneDelegate {
         self.update(0, for: scene)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // Disable the swipe-to-back gesture so users can't accidentally leave the game.
+        self.navigationController!.interactivePopGestureRecognizer?.isEnabled = false
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -50,11 +57,12 @@ class GameViewController: UIViewController, SKSceneDelegate {
     // MARK: - Score and time-out logic
     
     func update(_ currentTime: TimeInterval, for scene: SKScene) {
+        self.scoreLabel.text = "Score: \(self.scene.score)"
+
         let elapsedTime = Date().timeIntervalSince(startTime)
         let remainingSeconds = max(0, secondsPerGame - Int(elapsedTime))
-        
+
         self.title = String(format: "Time: %02d:%02d", remainingSeconds / 60, remainingSeconds % 60)
-        self.scoreLabel.text = "Score: \(self.scene.score)"
 
         if remainingSeconds == 0 {
             scene.isPaused = true
