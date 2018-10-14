@@ -10,7 +10,7 @@ import UIKit
 import SpriteKit
 import GameplayKit
 
-let secondsPerGame = 120
+let secondsPerGame = 180
 
 class GameViewController: UIViewController, SKSceneDelegate {
 

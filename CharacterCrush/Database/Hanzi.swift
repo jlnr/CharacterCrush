@@ -47,6 +47,21 @@ extension Hanzi {
         return sharedTones
     }
     
+    func hasTone(_ tone: Int) -> Bool {
+        switch tone {
+        case 1:
+            return firstTone != nil
+        case 2:
+            return secondTone != nil
+        case 3:
+            return thirdTone != nil
+        case 4:
+            return fourthTone != nil
+        default:
+            fatalError("Invalid tone number: \(tone)")
+        }
+    }
+    
     var isJoker: Bool {
         var tones = 0
         if firstTone != nil {

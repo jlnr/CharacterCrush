@@ -30,7 +30,7 @@ class GameScene: SKScene {
     
     init(source: HanziSource, level: HanziLevel, delegate: SKSceneDelegate) {
         self.textToSpeech = CharacterTextToSpeech(language: source.voiceLanguage)
-        self.grid = TileGrid(level: level)
+        self.grid = TileGrid(nextTileGenerator: NextTileGenerator(level: level, demoMode: false))
         super.init(size: grid.size)
         addChild(grid)
         
@@ -58,6 +58,8 @@ class GameScene: SKScene {
         } else {
             // Make the scene taller to match view's aspect ratio.
             self.size.height *= (gridAspectRatio / viewAspectRatio)
+            // Also adjust the anchor point to re-center the scene's contents.
+            self.anchorPoint.y = (self.size.height - grid.size.height) / 2 / self.size.height
         }
     }
     
@@ -92,7 +94,7 @@ extension GameScene {
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let selectionPath = selectionPath else { return }
         
-        let coordinate = Coordinate(closestToLocation: selectionPath.touch.location(in: self))
+        let coordinate = Coordinate(closestToLocation: selectionPath.touch!.location(in: self))
         if selectionPath.tryToExtend(to: coordinate) {
             textToSpeech.pronounce(character: grid[coordinate]!.hanzi.character)
         } else {
@@ -103,7 +105,7 @@ extension GameScene {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let selectionPath = selectionPath else { return }
         
-        if touches.contains(selectionPath.touch) {
+        if touches.contains(selectionPath.touch!) {
             if selectionPath.tryToClear() {
                 self.score += selectionPath.score
             }
@@ -114,7 +116,7 @@ extension GameScene {
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let selectionPath = selectionPath else { return }
 
-        if touches.contains(selectionPath.touch) {
+        if touches.contains(selectionPath.touch!) {
             self.selectionPath = nil
         }
     }

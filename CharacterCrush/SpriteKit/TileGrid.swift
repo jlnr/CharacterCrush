@@ -10,7 +10,7 @@ import SpriteKit
 
 class TileGrid: SKNode {
     
-    let level: HanziLevel
+    private let nextTileGenerator: NextTileGenerator
     
     let size = CGSize(width: CGFloat(Coordinate.validColumns.count + 1) * tileSize,
                       height: CGFloat(Coordinate.validRows.count + 1) * tileSize)
@@ -24,8 +24,8 @@ class TileGrid: SKNode {
         return Date().timeIntervalSince(lastTileDroppedAt) < maxTileDropTime
     }
     
-    init(level: HanziLevel) {
-        self.level = level
+    init(nextTileGenerator: NextTileGenerator) {
+        self.nextTileGenerator = nextTileGenerator
         
         super.init()
         
@@ -107,7 +107,7 @@ class TileGrid: SKNode {
     private func addTile(dropFrom coordinate: Coordinate) -> HanziTile {
         lastTileDroppedAt = Date()
         
-        let hanzi = level.characters.randomElement()!
+        let hanzi = nextTileGenerator.nextHanzi(at: coordinate)
         let tile = HanziTile(hanzi: hanzi, at: coordinate)
         addChild(tile)
         return tile

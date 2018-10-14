@@ -14,7 +14,7 @@ let minimumLengthToClear = 2
 
 class SelectionPath: SKShapeNode {
     
-    let touch: UITouch
+    let touch: UITouch?
     
     var score: Int {
         // This is 1 when the bare minimum was cleared, and more otherwise.
@@ -26,10 +26,11 @@ class SelectionPath: SKShapeNode {
     private let grid: TileGrid
     private var coordinates: [Coordinate]
     
-    init(touch: UITouch, from coordinate: Coordinate, grid: TileGrid) {
+    init(touch: UITouch?, from coordinate: Coordinate, grid: TileGrid) {
         self.touch = touch
         self.grid = grid
         self.coordinates = [coordinate]
+        grid[coordinate]!.isHighlighted = true
     
         super.init()
 
@@ -42,6 +43,12 @@ class SelectionPath: SKShapeNode {
         fatalError("init(coder:) has not been implemented")
     }
     
+    deinit {
+        for coordinate in self.coordinates {
+            grid[coordinate]!.isHighlighted = false
+        }
+    }
+    
     func tryToExtend(to coordinate: Coordinate) -> Bool {
         guard coordinate.isWithinGrid,
             !coordinates.contains(coordinate),
@@ -52,6 +59,7 @@ class SelectionPath: SKShapeNode {
             return false
         }
         
+        grid[coordinate]!.isHighlighted = true
         coordinates.append(coordinate)
         updateAppearance()
         return true
@@ -61,6 +69,7 @@ class SelectionPath: SKShapeNode {
         guard coordinates.count > 1,
             coordinates[coordinates.count - 2] == coordinate else { return }
         
+        grid[coordinates.last!]!.isHighlighted = false
         coordinates.removeLast()
         updateAppearance()
     }
@@ -86,7 +95,10 @@ class SelectionPath: SKShapeNode {
 extension SelectionPath {
     
     private func updateAppearance() {
-        self.lineWidth = coordinates.count == 1 ? tileSize * 1.5 : tileSize * 0.8
+        self.lineWidth = tileSize * 1.05
+        if UIDevice.current.userInterfaceIdiom != .pad && coordinates.count == 1 {
+             self.lineWidth = tileSize * 1.4
+        }
         self.lineCap = .round
         self.lineJoin = .round
         self.strokeTexture = possibleTones.matchingBackgroundTexture()

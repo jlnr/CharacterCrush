@@ -12,11 +12,18 @@ class HanziTile: SKSpriteNode {
     
     let hanzi: Hanzi
     
+    var isHighlighted = false {
+        didSet {
+            updateBlendFactor()
+        }
+    }
+    
     init(hanzi: Hanzi, at coordinate: Coordinate) {
         self.hanzi = hanzi
         
-        super.init(texture: hanzi.asTexture(), color: .clear,
+        super.init(texture: hanzi.asTexture(), color: (hanzi.isJoker ? .yellow : .black),
                    size: CGSize(width: tileSize, height: tileSize))
+        updateBlendFactor()
 
         self.position = coordinate.toLocation()
 
@@ -33,6 +40,10 @@ class HanziTile: SKSpriteNode {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func updateBlendFactor() {
+        self.colorBlendFactor = isHighlighted ? 0.0 : 1.0
     }
     
 }

@@ -7,10 +7,19 @@
 //
 
 import UIKit
+import SpriteKit
 
 class SettingsViewController: UIViewController {
     
+    @IBOutlet weak var tutorialView: SKView!
     @IBOutlet var hanziLevelsPickerController: HanziLevelsPickerController!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let level = hanziLevelsPickerController.selectedLevel
+        tutorialView.presentScene(TutorialScene(level: level))
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.destination {

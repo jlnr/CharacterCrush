@@ -19,8 +19,8 @@ fileprivate func renderToTexture(size: CGSize, block: () throws -> ()) rethrows 
 fileprivate let hanziTextureSize: CGFloat = 64
 
 fileprivate let textAttributes: [NSAttributedString.Key: Any] = [
-    .font: UIFont.systemFont(ofSize: hanziTextureSize * 0.9),
-    .foregroundColor: UIColor.black,
+    .font: UIFont.systemFont(ofSize: hanziTextureSize * 0.75),
+    .foregroundColor: UIColor.white,
 ]
 
 fileprivate let jokerTextShadow: NSShadow = {
@@ -31,10 +31,11 @@ fileprivate let jokerTextShadow: NSShadow = {
     return shadow
 }()
 
-fileprivate let jokerTextAttributes = textAttributes.merging([
+fileprivate let jokerTextAttributes: [NSAttributedString.Key: Any] = [
+    .font: UIFont.systemFont(ofSize: hanziTextureSize * 0.75),
+    .foregroundColor: UIColor.white,
     .shadow: jokerTextShadow,
-    .foregroundColor: UIColor.yellow,
-]) { (old, new) in new }
+]
 
 extension Hanzi {
 
@@ -77,10 +78,8 @@ extension Hanzi.Tones {
             }
         }
         
-        let rows = 24
-        
-        let texture = renderToTexture(size: CGSize(width: 1, height: rows)) {
-            for row in 0..<rows {
+        let texture = renderToTexture(size: CGSize(width: 1, height: colors.count)) {
+            for row in 0..<colors.count {
                 colors[row % colors.count].setFill()
                 UIRectFill(CGRect(x: 0, y: row, width: 1, height: 1))
             }
