@@ -29,7 +29,7 @@ class TileGrid: SKNode {
         floor.physicsBody!.categoryBitMask = Category.floor.rawValue
         addChild(floor)
         
-        refillGrid(fromAbove: false)
+        refillGrid()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -45,13 +45,6 @@ class TileGrid: SKNode {
         }
     }
     
-    private func addTile(at coordinate: Coordinate) -> HanziTile {
-        let hanzi = level.characters.randomElement()!
-        let tile = HanziTile(hanzi: hanzi, at: coordinate)
-        addChild(tile)
-        return tile
-    }
-    
     func removeTiles(at coordinates: [Coordinate]) {
         assert(coordinateToTile.count == Coordinate.validColumns.count * Coordinate.validRows.count,
                "TileGrid must be completely filled before removing tiles")
@@ -61,7 +54,7 @@ class TileGrid: SKNode {
             self[coordinate] = nil
         }
         updateCoordinates()
-        refillGrid(fromAbove: true)
+        refillGrid()
     }
     
     private func updateCoordinates() {
@@ -88,23 +81,27 @@ class TileGrid: SKNode {
         return nil
     }
     
-    private func refillGrid(fromAbove: Bool) {
+    private func refillGrid() {
         for column in Coordinate.validColumns {
             var newTilesInColumn = 0
             
             for row in Coordinate.validRows {
                 let coordinate = Coordinate(column: column, row: row)
                 if self[coordinate] == nil {
-                    let tile = addTile(at: Coordinate(column: column, row: row))
-                    self[coordinate] = tile
-                    if fromAbove {
-                        let row = Coordinate.validRows.upperBound + 2 + newTilesInColumn
-                        tile.position = Coordinate(column: column, row: row).toLocation()
-                        newTilesInColumn += 1
-                    }
+                    let rowAboveGrid = Coordinate.validRows.upperBound + 2 + newTilesInColumn
+                    let dropCoordinate = Coordinate(column: column, row: rowAboveGrid)
+                    self[coordinate] = addTile(dropFrom: dropCoordinate)
+                    newTilesInColumn += 1
                 }
             }
         }
+    }
+    
+    private func addTile(dropFrom coordinate: Coordinate) -> HanziTile {
+        let hanzi = level.characters.randomElement()!
+        let tile = HanziTile(hanzi: hanzi, at: coordinate)
+        addChild(tile)
+        return tile
     }
     
 }

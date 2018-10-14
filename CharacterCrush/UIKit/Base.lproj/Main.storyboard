@@ -28,18 +28,18 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <skView contentMode="scaleToFill" verticalHuggingPriority="1" translatesAutoresizingMaskIntoConstraints="NO" id="1lU-BX-B0x">
-                                        <rect key="frame" x="0.0" y="76.5" width="382" height="372.5"/>
+                                        <rect key="frame" x="0.0" y="76.5" width="382" height="395.5"/>
                                         <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     </skView>
                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hxc-oK-oLA">
-                                        <rect key="frame" x="0.0" y="461" width="382" height="216"/>
+                                        <rect key="frame" x="0.0" y="484" width="382" height="216"/>
                                         <connections>
                                             <outlet property="dataSource" destination="h4R-yW-dUj" id="nTx-bb-IMM"/>
                                             <outlet property="delegate" destination="h4R-yW-dUj" id="rxu-nz-oPV"/>
                                         </connections>
                                     </pickerView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DgK-LT-LeF" customClass="PrettyButton" customModule="CharacterCrush" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="689" width="382" height="53"/>
+                                        <rect key="frame" x="0.0" y="712" width="382" height="30"/>
                                         <state key="normal" title="Start Game"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isPrimary" value="YES"/>
@@ -101,7 +101,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <skView contentMode="scaleToFill" allowsTransparency="YES" ignoresSiblingOrder="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MkK-yx-Vbj">
-                                <rect key="frame" x="0.0" y="143.5" width="414" height="718.5"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </skView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Mlr-PV-Acn">
@@ -126,8 +126,8 @@
                         <constraints>
                             <constraint firstItem="MkK-yx-Vbj" firstAttribute="trailing" secondItem="4qk-I5-YsI" secondAttribute="trailing" id="6S5-PF-M5x"/>
                             <constraint firstItem="Mlr-PV-Acn" firstAttribute="leading" secondItem="4qk-I5-YsI" secondAttribute="leading" constant="20" id="AuF-xn-8d2"/>
+                            <constraint firstItem="MkK-yx-Vbj" firstAttribute="top" secondItem="4qk-I5-YsI" secondAttribute="top" id="KnH-1w-qyt"/>
                             <constraint firstItem="MkK-yx-Vbj" firstAttribute="leading" secondItem="4qk-I5-YsI" secondAttribute="leading" id="bhW-dl-6sh"/>
-                            <constraint firstItem="MkK-yx-Vbj" firstAttribute="top" secondItem="Mlr-PV-Acn" secondAttribute="bottom" constant="20" id="gYz-eD-Iyx"/>
                             <constraint firstItem="MkK-yx-Vbj" firstAttribute="bottom" secondItem="4qk-I5-YsI" secondAttribute="bottom" id="mZZ-pH-Zvf"/>
                             <constraint firstItem="Mlr-PV-Acn" firstAttribute="top" secondItem="4qk-I5-YsI" secondAttribute="top" constant="15" id="uzo-FY-Hg7"/>
                             <constraint firstItem="4qk-I5-YsI" firstAttribute="trailing" secondItem="Mlr-PV-Acn" secondAttribute="trailing" constant="20" id="zg4-Y4-5kx"/>

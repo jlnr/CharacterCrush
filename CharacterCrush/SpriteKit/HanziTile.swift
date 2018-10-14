@@ -25,6 +25,9 @@ class HanziTile: SKSpriteNode {
         body.restitution = 0
         body.categoryBitMask = Category.tiles(column: coordinate.column).rawValue
         body.collisionBitMask = Category.floorAndTiles(column: coordinate.column).rawValue
+        // Let each tile spawn with a different vertical velocity, to let them all fall down
+        // nicely in the beginning of the game.
+        body.velocity =  CGVector(dx: 0, dy: Double.random(in: -10000...0))
         self.physicsBody = body
     }
     

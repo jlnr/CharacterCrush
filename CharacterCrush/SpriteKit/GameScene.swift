@@ -53,11 +53,11 @@ class GameScene: SKScene {
         if viewAspectRatio > gridAspectRatio {
             // Make the scene wider to match view's aspect ratio.
             self.size.width *= (viewAspectRatio / gridAspectRatio)
+            // Also adjust the anchor point to re-center the scene's contents.
             self.anchorPoint.x = (self.size.width - grid.size.width) / 2 / self.size.width
         } else {
             // Make the scene taller to match view's aspect ratio.
             self.size.height *= (gridAspectRatio / viewAspectRatio)
-            self.anchorPoint.y = (self.size.height - grid.size.height) / 2 / self.size.height
         }
     }
     
