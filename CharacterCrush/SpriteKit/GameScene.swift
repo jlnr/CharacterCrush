@@ -11,6 +11,8 @@ import AVKit
 
 class GameScene: SKScene {
     
+    let textToSpeech: CharacterTextToSpeech
+    
     private (set) var score = 0
     
     private let grid: TileGrid
@@ -27,9 +29,7 @@ class GameScene: SKScene {
     }
     
     init(source: HanziSource, level: HanziLevel, delegate: SKSceneDelegate) {
-        self.voice = AVSpeechSynthesisVoice(language: source.voiceLanguage)
-        self.synthesizer = self.voice == nil ? nil : AVSpeechSynthesizer()
-        
+        self.textToSpeech = CharacterTextToSpeech(language: source.voiceLanguage)
         self.grid = TileGrid(level: level)
         super.init(size: grid.size)
         addChild(grid)
@@ -70,22 +70,6 @@ class GameScene: SKScene {
         physicsWorld.speed = grid.needsPhysics ? 1.0 : 0.0
     }
     
-    // MARK: - Text-to-speech
-    
-    var isMuted = false
-    
-    private let synthesizer: AVSpeechSynthesizer?
-    private let voice: AVSpeechSynthesisVoice?
-    
-    func pronounceCharacter(_ character: Character) {
-        guard !isMuted, let synthesizer = synthesizer, !synthesizer.isSpeaking else { return }
-        
-        // Try speaking this character using Apple's text-to-speech engine.
-        let utterance = AVSpeechUtterance(string: String(character))
-        utterance.voice = voice
-        synthesizer.speak(utterance)
-    }
-    
 }
 
 // MARK: - Touch handling
@@ -99,7 +83,7 @@ extension GameScene {
             let coordinate = Coordinate(closestToLocation: touch.location(in: self))
             if coordinate.isWithinGrid {
                 self.selectionPath = SelectionPath(touch: touch, from: coordinate, grid: grid)
-                pronounceCharacter(grid[coordinate]!.hanzi.character)
+                textToSpeech.pronounce(character: grid[coordinate]!.hanzi.character)
                 return
             }
         }
@@ -110,7 +94,7 @@ extension GameScene {
         
         let coordinate = Coordinate(closestToLocation: selectionPath.touch.location(in: self))
         if selectionPath.tryToExtend(to: coordinate) {
-            pronounceCharacter(grid[coordinate]!.hanzi.character)
+            textToSpeech.pronounce(character: grid[coordinate]!.hanzi.character)
         } else {
             selectionPath.tryToBacktrack(to: coordinate)
         }

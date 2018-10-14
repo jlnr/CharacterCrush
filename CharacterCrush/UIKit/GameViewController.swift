@@ -43,8 +43,8 @@ class GameViewController: UIViewController, SKSceneDelegate {
     }
     
     @IBAction func toggleMute(_ sender: Any) {
-        scene.isMuted.toggle()
-        navigationItem.rightBarButtonItem!.title = (scene.isMuted ? "🔇" : "🔈")
+        scene.textToSpeech.isMuted.toggle()
+        navigationItem.rightBarButtonItem!.title = (scene.textToSpeech.isMuted ? "🔇" : "🔈")
     }
 
     // MARK: - Score and time-out logic
