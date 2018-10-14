@@ -107,7 +107,7 @@ extension GameScene {
         
         if touches.contains(selectionPath.touch!) {
             if selectionPath.tryToClear() {
-                self.score += selectionPath.score
+                self.score += scoreForSelection(length: selectionPath.length)
             }
             self.selectionPath = nil
         }
@@ -120,5 +120,13 @@ extension GameScene {
             self.selectionPath = nil
         }
     }
+    
+    func scoreForSelection(length: Int) -> Int {
+        // This is 1 when the bare minimum was cleared, and more otherwise.
+        let baseScore = length - SelectionPath.minimumLengthToClear + 1
+        // 1, 3, 6, 10, 15 ...
+        return baseScore * (baseScore + 1) / 2
+    }
+
     
 }

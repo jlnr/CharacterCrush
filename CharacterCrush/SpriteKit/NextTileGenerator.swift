@@ -20,7 +20,7 @@ class NextTileGenerator {
         self.demoMode = demoMode
         for column in Coordinate.validColumns {
             // Start the first row with tones 1, 2, 1, 2, ...
-            self.nextTones[column] = (column % 2) + 1
+            self.nextTones[column] = (column / 2 % 2) + 1
         }
     }
     

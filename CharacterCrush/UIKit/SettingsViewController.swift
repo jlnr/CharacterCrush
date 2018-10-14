@@ -9,7 +9,7 @@
 import UIKit
 import SpriteKit
 
-class SettingsViewController: UIViewController {
+class SettingsViewController: UIViewController, HanziLevelsPickerControllerDelegate {
     
     @IBOutlet weak var tutorialView: SKView!
     @IBOutlet var hanziLevelsPickerController: HanziLevelsPickerController!
@@ -17,8 +17,7 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let level = hanziLevelsPickerController.selectedLevel
-        tutorialView.presentScene(TutorialScene(level: level))
+        selectedLevelDidChange()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -29,6 +28,11 @@ class SettingsViewController: UIViewController {
         default:
             super.prepare(for: segue, sender: sender)
         }
+    }
+
+    func selectedLevelDidChange() {
+        let level = hanziLevelsPickerController.selectedLevel
+        tutorialView.presentScene(TutorialScene(level: level))
     }
     
 }

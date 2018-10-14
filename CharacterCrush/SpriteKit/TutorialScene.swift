@@ -44,8 +44,32 @@ class TutorialScene: SKScene {
         physicsWorld.speed = grid.needsPhysics ? 1.0 : 0.0
 
         if !grid.needsPhysics && selectionPath == nil {
-            self.selectionPath = SelectionPath(touch: nil, from: Coordinate(column: 1, row: 5), grid: grid)
+            self.selectionPath = SelectionPath(touch: nil, from: coordinate(forStep: 1), grid: grid)
+            self.run(.repeatForever(.sequence([.wait(forDuration: 0.3), .run(self.selectNextTile)])))
         }
+    }
+    
+    private func selectNextTile() {
+        guard let selectionPath = selectionPath else { return }
+        
+        if selectionPath.length < Coordinate.validColumns.count {
+            let result = selectionPath.tryToExtend(to: coordinate(forStep: selectionPath.length + 1))
+            if !result {
+                fatalError("Logic bug in tutorial")
+            }
+            
+        } else {
+            let result = selectionPath.tryToClear()
+            if !result {
+                fatalError("Logic bug in tutorial")
+            }
+            self.selectionPath = nil
+            self.removeAllActions()
+        }
+    }
+    
+    private func coordinate(forStep step: Int) -> Coordinate {
+        return Coordinate(column: step, row: 6 - (step / 2 % 2))
     }
     
 }

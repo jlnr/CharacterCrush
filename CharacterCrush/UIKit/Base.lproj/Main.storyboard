@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Character Crush-->
+        <!--Delegate-->
         <scene sceneID="cya-mL-wRs">
             <objects>
                 <viewController id="lxb-cp-83O" customClass="SettingsViewController" customModule="CharacterCrush" customModuleProvider="target" sceneMemberID="viewController">
@@ -25,20 +25,32 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <skView contentMode="scaleToFill" verticalHuggingPriority="1" translatesAutoresizingMaskIntoConstraints="NO" id="1lU-BX-B0x">
-                                <rect key="frame" x="20" y="189" width="374" height="395.5"/>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K75-Z1-2Ka" userLabel="SKView Clipping Container">
+                                <rect key="frame" x="20" y="189" width="374" height="418.5"/>
+                                <subviews>
+                                    <skView contentMode="scaleToFill" verticalHuggingPriority="1" translatesAutoresizingMaskIntoConstraints="NO" id="1lU-BX-B0x">
+                                        <rect key="frame" x="8" y="-500" width="358" height="1418.5"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
+                                                <color key="value" cocoaTouchSystemColor="darkTextColor"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                <integer key="value" value="2"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </skView>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
-                                        <color key="value" cocoaTouchSystemColor="darkTextColor"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                        <integer key="value" value="2"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </skView>
+                                <constraints>
+                                    <constraint firstAttribute="trailingMargin" secondItem="1lU-BX-B0x" secondAttribute="trailing" id="Kq6-WX-BsB"/>
+                                    <constraint firstItem="1lU-BX-B0x" firstAttribute="bottom" secondItem="K75-Z1-2Ka" secondAttribute="bottom" constant="500" id="QTw-GW-DAb"/>
+                                    <constraint firstItem="1lU-BX-B0x" firstAttribute="leading" secondItem="K75-Z1-2Ka" secondAttribute="leadingMargin" id="YvM-dM-8YY"/>
+                                    <constraint firstAttribute="top" secondItem="1lU-BX-B0x" secondAttribute="top" constant="500" id="ZJJ-k5-r5g"/>
+                                </constraints>
+                            </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="249" verticalCompressionResistancePriority="749" image="WhiteBorder" translatesAutoresizingMaskIntoConstraints="NO" id="IWU-5X-HdC">
-                                <rect key="frame" x="20" y="189" width="374" height="395.5"/>
+                                <rect key="frame" x="20" y="189" width="374" height="418.5"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Demo" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Ag-f3-BF6">
                                 <rect key="frame" x="20" y="173.5" width="374" height="20.5"/>
@@ -47,13 +59,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Difficulty/proficiency level:" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lau-ED-tjW">
-                                <rect key="frame" x="20" y="604.5" width="354" height="20.5"/>
+                                <rect key="frame" x="20" y="627.5" width="354" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hxc-oK-oLA">
-                                <rect key="frame" x="0.0" y="625" width="414" height="144"/>
+                                <rect key="frame" x="0.0" y="648" width="414" height="144"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="144" id="xhR-Kq-pnX"/>
                                 </constraints>
@@ -63,7 +75,7 @@
                                 </connections>
                             </pickerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DgK-LT-LeF" customClass="PrettyButton" customModule="CharacterCrush" customModuleProvider="target">
-                                <rect key="frame" x="20" y="789" width="374" height="53"/>
+                                <rect key="frame" x="20" y="812" width="374" height="30"/>
                                 <state key="normal" title="Start Game"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isPrimary" value="YES"/>
@@ -75,30 +87,29 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="IWU-5X-HdC" firstAttribute="bottom" secondItem="K75-Z1-2Ka" secondAttribute="bottom" id="07D-Cy-Wt7"/>
                             <constraint firstItem="hxc-oK-oLA" firstAttribute="top" secondItem="Lau-ED-tjW" secondAttribute="bottom" id="0II-FH-3ES"/>
                             <constraint firstItem="9Ag-f3-BF6" firstAttribute="bottom" secondItem="IWU-5X-HdC" secondAttribute="top" constant="5" id="2UX-ka-v5j"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="K75-Z1-2Ka" secondAttribute="leading" id="90l-98-6bK"/>
                             <constraint firstItem="ewd-gw-iNN" firstAttribute="leading" secondItem="xEj-pd-cGG" secondAttribute="leadingMargin" id="Co2-tI-Jk3"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="1lU-BX-B0x" secondAttribute="trailing" id="D01-3c-dOy"/>
                             <constraint firstItem="hxc-oK-oLA" firstAttribute="leading" secondItem="xEj-pd-cGG" secondAttribute="leading" id="ElF-au-fq0"/>
+                            <constraint firstItem="Lau-ED-tjW" firstAttribute="top" secondItem="K75-Z1-2Ka" secondAttribute="bottom" constant="20" id="GnB-vI-WZ2"/>
+                            <constraint firstItem="IWU-5X-HdC" firstAttribute="trailing" secondItem="K75-Z1-2Ka" secondAttribute="trailing" id="HNB-Cl-qOf"/>
                             <constraint firstAttribute="trailing" secondItem="hxc-oK-oLA" secondAttribute="trailing" id="HVh-zm-8Yo"/>
-                            <constraint firstItem="1lU-BX-B0x" firstAttribute="leading" secondItem="xEj-pd-cGG" secondAttribute="leadingMargin" id="IAd-mF-6uc"/>
                             <constraint firstItem="DgK-LT-LeF" firstAttribute="leading" secondItem="xEj-pd-cGG" secondAttribute="leadingMargin" id="IRI-xk-J6z"/>
                             <constraint firstAttribute="leadingMargin" secondItem="Lau-ED-tjW" secondAttribute="leading" id="OjW-J9-9Du"/>
                             <constraint firstItem="ewd-gw-iNN" firstAttribute="top" secondItem="xEj-pd-cGG" secondAttribute="topMargin" constant="20" id="Pyq-2x-wV5"/>
-                            <constraint firstItem="1lU-BX-B0x" firstAttribute="top" secondItem="ewd-gw-iNN" secondAttribute="bottom" constant="20" id="Rpw-aq-kcR"/>
-                            <constraint firstItem="Lau-ED-tjW" firstAttribute="top" secondItem="1lU-BX-B0x" secondAttribute="bottom" constant="20" id="Ryu-FX-AWC"/>
-                            <constraint firstItem="9Ag-f3-BF6" firstAttribute="centerX" secondItem="IWU-5X-HdC" secondAttribute="centerX" id="SOI-05-70u"/>
-                            <constraint firstItem="IWU-5X-HdC" firstAttribute="leading" secondItem="1lU-BX-B0x" secondAttribute="leading" id="ahF-nE-GLC"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Lau-ED-tjW" secondAttribute="trailing" constant="20" id="hYt-aC-7SN"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ewd-gw-iNN" secondAttribute="trailing" id="hbs-b5-eyF"/>
                             <constraint firstItem="9Ag-f3-BF6" firstAttribute="leading" secondItem="IWU-5X-HdC" secondAttribute="leading" id="hvW-6l-08i"/>
-                            <constraint firstItem="IWU-5X-HdC" firstAttribute="trailing" secondItem="1lU-BX-B0x" secondAttribute="trailing" id="iBM-dM-29A"/>
                             <constraint firstAttribute="bottomMargin" secondItem="DgK-LT-LeF" secondAttribute="bottom" constant="20" id="k4Y-99-grw"/>
                             <constraint firstItem="9Ag-f3-BF6" firstAttribute="trailing" secondItem="IWU-5X-HdC" secondAttribute="trailing" id="lnC-kC-is4"/>
                             <constraint firstItem="DgK-LT-LeF" firstAttribute="top" secondItem="hxc-oK-oLA" secondAttribute="bottom" constant="20" id="m7k-8w-yJx"/>
-                            <constraint firstItem="IWU-5X-HdC" firstAttribute="top" secondItem="1lU-BX-B0x" secondAttribute="top" id="o6V-RB-BtM"/>
-                            <constraint firstItem="IWU-5X-HdC" firstAttribute="bottom" secondItem="1lU-BX-B0x" secondAttribute="bottom" id="rAV-JB-TQR"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="K75-Z1-2Ka" secondAttribute="trailing" id="o5j-xp-FSB"/>
+                            <constraint firstItem="IWU-5X-HdC" firstAttribute="leading" secondItem="K75-Z1-2Ka" secondAttribute="leading" id="qHt-Gh-Q94"/>
+                            <constraint firstItem="K75-Z1-2Ka" firstAttribute="top" secondItem="ewd-gw-iNN" secondAttribute="bottom" constant="20" id="tVs-Ow-lac"/>
                             <constraint firstAttribute="trailingMargin" secondItem="DgK-LT-LeF" secondAttribute="trailing" id="wpp-Xu-Vex"/>
+                            <constraint firstItem="IWU-5X-HdC" firstAttribute="top" secondItem="K75-Z1-2Ka" secondAttribute="top" id="zQw-1R-3fN"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="hUk-EW-1RC"/>
                     </view>
@@ -113,6 +124,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="79Y-CC-BOo" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <customObject id="h4R-yW-dUj" customClass="HanziLevelsPickerController" customModule="CharacterCrush" customModuleProvider="target">
                     <connections>
+                        <outlet property="delegate" destination="lxb-cp-83O" id="MMI-dm-Mwe"/>
                         <outlet property="pickerView" destination="hxc-oK-oLA" id="WlG-IJ-GKM"/>
                     </connections>
                 </customObject>

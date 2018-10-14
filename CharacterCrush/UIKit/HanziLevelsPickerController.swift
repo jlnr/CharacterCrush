@@ -8,8 +8,15 @@
 
 import UIKit
 
+@objc protocol HanziLevelsPickerControllerDelegate: class {
+    
+    func selectedLevelDidChange()
+    
+}
+
 class HanziLevelsPickerController: NSObject, UIPickerViewDataSource, UIPickerViewDelegate {
 
+    @IBOutlet weak var delegate: HanziLevelsPickerControllerDelegate!
     @IBOutlet weak var pickerView: UIPickerView!
 
     private enum PickerComponent: Int, CaseIterable {
@@ -54,6 +61,8 @@ class HanziLevelsPickerController: NSObject, UIPickerViewDataSource, UIPickerVie
             // TODO: Update live demo running in SKView above.
             break
         }
+
+        delegate.selectedLevelDidChange()
     }
     
 }
