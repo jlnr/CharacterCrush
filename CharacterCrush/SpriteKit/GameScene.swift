@@ -11,7 +11,7 @@ import AVKit
 
 class GameScene: SKScene {
     
-    let textToSpeech: CharacterTextToSpeech
+    let soundPlayer: SoundPlayer
     
     private (set) var score = 0
     
@@ -29,7 +29,7 @@ class GameScene: SKScene {
     }
     
     init(source: HanziSource, level: HanziLevel, delegate: SKSceneDelegate) {
-        self.textToSpeech = CharacterTextToSpeech(language: source.voiceLanguage)
+        self.soundPlayer = SoundPlayer(voiceLanguage: source.voiceLanguage)
         self.grid = TileGrid(nextTileGenerator: NextTileGenerator(level: level, demoMode: false))
         super.init(size: grid.size)
         addChild(grid)
@@ -86,7 +86,8 @@ extension GameScene {
             let coordinate = Coordinate(closestToLocation: touch.location(in: self))
             if coordinate.isWithinGrid {
                 self.selectionPath = SelectionPath(touch: touch, from: coordinate, grid: grid)
-                textToSpeech.pronounce(character: grid[coordinate]!.hanzi.character)
+                soundPlayer.playTick()
+                soundPlayer.pronounce(character: grid[coordinate]!.hanzi.character)
                 return
             }
         }
@@ -98,9 +99,10 @@ extension GameScene {
         
         let coordinate = Coordinate(closestToLocation: selectionPath.touch!.location(in: self))
         if selectionPath.tryToExtend(to: coordinate) {
-            textToSpeech.pronounce(character: grid[coordinate]!.hanzi.character)
-        } else {
-            selectionPath.tryToBacktrack(to: coordinate)
+            soundPlayer.playTick()
+            soundPlayer.pronounce(character: grid[coordinate]!.hanzi.character)
+        } else if selectionPath.tryToBacktrack(to: coordinate) {
+            soundPlayer.playTick()
         }
     }
     
@@ -111,6 +113,7 @@ extension GameScene {
         if touches.contains(selectionPath.touch!) {
             if selectionPath.tryToClear() {
                 self.score += scoreForSelection(length: selectionPath.length)
+                soundPlayer.playSuccess()
             }
             self.selectionPath = nil
         }

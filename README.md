@@ -21,7 +21,7 @@ This prototype is written using the Swift language and Apple's own SpriteKit fra
 
 Simply download or clone this repository, open `CharacterCrush.pbxproj`, and run the game on an iPhone or iPad of your choice.
 
-Note that some effects (based on SpriteKit/Metal) do not work in the iPhone/iPad simulator.
+Note that some sound effects, and some visual effects (based on SpriteKit/Metal) do not work in the iPhone/iPad simulator.
 
 ## Possible Integration with ChinesePod
 
@@ -36,17 +36,18 @@ How would this app fit into the ChinesePod ecosystem?
 There is always more to do. Here are a few ideas that didn't make it in time:
 
 * Review the character database: am I missing any characters or tones?
-* Play all pronunciations when selecting a character with multiple pronunciations, to aid the user in learning characters.
-* Online highscore, e.g. using Apple's free GameCenter API.
-* Remember last selected difficulty level.
+* Play *all* pronunciations when selecting a character with multiple pronunciations, to aid the user in learning characters.
+* Online highscore list, e.g. using Apple's free GameCenter API.
+* Don't use Apple's system sound effects.
+* Remember the last selected difficulty level.
 * Support [other tone color schemes than Pleco's](http://laowaichinese.net/tone-colors-and-what-pleco-did-with-them.htm) in `Hanzi+RenderToTexture.swift`.
 * Replace SpriteKit (plain UIKit would do the trick).
-  Its physics engine has nothing but trouble, and some effects don't work in the simulator (e.g. `SKShapeNode.strokeTexture`).
+  Its physics engine quickly drains users' battery and has been quite troublesome.
 * The game should actively avoid having the user get stuck with no moves left.
   Easiest solution: Refill the board with characters of the same tone when there are no moves left.
 
 ## License
 
-Unlike most of of my other repositories, this code is *not* provided under a permissive license.
+Unlike most of my other repositories, this code is *not* provided under a permissive license.
 
 Copyright © 2018 Julian Raschke. All rights reserved.

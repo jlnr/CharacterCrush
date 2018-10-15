@@ -66,13 +66,14 @@ class SelectionPath: SKShapeNode {
     }
     
     /// Tries to backtrack to the given coordinate.
-    func tryToBacktrack(to coordinate: Coordinate) {
+    func tryToBacktrack(to coordinate: Coordinate) -> Bool {
         guard coordinates.count > 1,
-            coordinates[coordinates.count - 2] == coordinate else { return }
+            coordinates[coordinates.count - 2] == coordinate else { return false }
         
         grid[coordinates.last!]!.isHighlighted = false
         coordinates.removeLast()
         updateAppearance()
+        return true
     }
     
     /// Returns true if the current path can be cleared (and does so).
