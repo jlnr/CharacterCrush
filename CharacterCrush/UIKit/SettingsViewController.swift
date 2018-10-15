@@ -19,7 +19,20 @@ class SettingsViewController: UIViewController, HanziLevelsPickerControllerDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Show a tutorial with the initially selected HanziLevel.
         selectedLevelDidChange()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        tutorialView.isPaused = false
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        tutorialView.isPaused = true
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
