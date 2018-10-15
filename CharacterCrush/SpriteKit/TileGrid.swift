@@ -62,7 +62,7 @@ class TileGrid: SKNode {
                "TileGrid must be completely filled before removing tiles")
         
         for coordinate in coordinates {
-            self[coordinate]!.removeFromParent()
+            self[coordinate]!.clear()
             self[coordinate] = nil
         }
         updateCoordinates()

@@ -16,17 +16,12 @@ class SettingsViewController: UIViewController, HanziLevelsPickerControllerDeleg
     @IBOutlet weak var tutorialView: SKView!
     @IBOutlet var hanziLevelsPickerController: HanziLevelsPickerController!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // Show a tutorial with the initially selected HanziLevel.
-        selectedLevelDidChange()
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        // Play a tutorial with the currently (or initially) selected HanziLevel.
         tutorialView.isPaused = false
+        selectedLevelDidChange()
     }
     
     override func viewDidDisappear(_ animated: Bool) {

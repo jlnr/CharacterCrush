@@ -53,4 +53,15 @@ class HanziTile: SKSpriteNode {
         self.colorBlendFactor = isHighlighted ? 0.0 : 1.0
     }
     
+    /// Removes the tile from the board in an animated way. It is important that the tile stops
+    /// participating in physics as soon as this method is called.
+    func clear() {
+        self.isHighlighted = false
+        self.physicsBody!.isDynamic = false
+        self.run(.sequence([
+            .group([.fadeOut(withDuration: 0.2), .scale(to: 0.2, duration: 0.2)]),
+            .removeFromParent()]
+        ))
+    }
+    
 }

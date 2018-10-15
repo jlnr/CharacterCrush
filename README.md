@@ -13,7 +13,7 @@ However, instead of connecting items of the same color, the player must connect 
 ![Connecting Tiles](Assets/Connecting.gif)
 
 Selected characters are highlighted using [tone-specific colors](https://chinesepod.com/blog/2017/04/17/learn-chinese-tones-properly/) (see item 4, this game follows Pleco's color scheme).
-Characters with multiple tones (破音字) such as 好 (hǎo / hào) work like jokers, and can be used in a chain of either of their tones.
+Characters with multiple tones (破音字) such as 中 (zhōng / zhòng) work like jokers, and can be used in a chain of either of their tones.
 
 ## How to Play This Game
 
@@ -36,6 +36,7 @@ How would this app fit into the ChinesePod ecosystem?
 There is always more to do. Here are a few ideas that didn't make it in time:
 
 * Review the character database: am I missing any characters or tones?
+* Discuss: How should we deal with the silent tone? Should we add a fifth color for them?
 * Play *all* pronunciations when selecting a character with multiple pronunciations, to aid the user in learning characters.
 * Online highscore list, e.g. using Apple's free GameCenter API.
 * Don't use Apple's system sound effects.
