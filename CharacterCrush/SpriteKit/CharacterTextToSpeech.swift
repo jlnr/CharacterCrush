@@ -9,6 +9,7 @@
 import Foundation
 import AVKit
 
+/// A simple text-to-speech engine based on Apple's AVKit.
 class CharacterTextToSpeech {
 
     var isMuted = false

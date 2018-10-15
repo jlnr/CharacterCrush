@@ -8,6 +8,10 @@
 
 import Foundation
 
+/// Encapsulates the logic behind choosing the next tile.
+/// In `GameScene` (demoMode = false), this just means picking a random tile.
+/// In `TutorialScene` (demoMode = true), tiles will be picked based on a predictable pattern to
+/// make sure there is always a row that can be cleared from left to right.
 class NextTileGenerator {
     
     private let level: HanziLevel

@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// A coordinate represents the position of a tile within the `TileGrid`.
 struct Coordinate: Equatable, Hashable {
     let column: Int
     let row: Int
@@ -28,7 +29,7 @@ extension Coordinate {
     }
 }
 
-// MARK: - Converting between coordinates and location
+// MARK: - Converting between coordinates and locations within TileGrid
 
 let tileSize: CGFloat = 1000
 

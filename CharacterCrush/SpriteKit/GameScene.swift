@@ -78,6 +78,7 @@ class GameScene: SKScene {
 
 extension GameScene {
     
+    /// Lets the user start a new `SelectionPath`.
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard selectionPath == nil else { return }
         
@@ -91,6 +92,7 @@ extension GameScene {
         }
     }
     
+    /// Lets the user extend their `SelectionPath`, or backtrack to a recent position.
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let selectionPath = selectionPath else { return }
         
@@ -102,6 +104,7 @@ extension GameScene {
         }
     }
     
+    /// Finalizes the `SelectionPath` and increases the score (if applicable).
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let selectionPath = selectionPath else { return }
         
@@ -113,6 +116,7 @@ extension GameScene {
         }
     }
     
+    /// Finalizes the `SelectionPath` without increasing the player's score.
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let selectionPath = selectionPath else { return }
 
@@ -122,9 +126,8 @@ extension GameScene {
     }
     
     func scoreForSelection(length: Int) -> Int {
-        // This is 1 when the bare minimum was cleared, and more otherwise.
         let baseScore = length - SelectionPath.minimumLengthToClear + 1
-        // 1, 3, 6, 10, 15 ...
+        // Returns 1 for minimumLengthToClear, then 3, 6, 10, 15 ... (quadratic growth)
         return baseScore * (baseScore + 1) / 2
     }
 

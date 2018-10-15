@@ -8,6 +8,8 @@
 
 import SpriteKit
 
+/// Keeps track of which `HanziTile` is at which position, and adds new tiles to the grid until it
+/// is full.
 class TileGrid: SKNode {
     
     private let nextTileGenerator: NextTileGenerator
@@ -19,6 +21,8 @@ class TileGrid: SKNode {
     
     private var lastTileDroppedAt = Date()
     
+    /// To save battery power, the grid returns `false` here if the last dropped tile should have
+    /// come to rest by now. (`SKPhysicsBody.isResting` does not work.)
     var needsPhysics: Bool {
         let maxTileDropTime: TimeInterval = 2.5
         return Date().timeIntervalSince(lastTileDroppedAt) < maxTileDropTime
@@ -43,6 +47,7 @@ class TileGrid: SKNode {
         fatalError("init(coder:) has not been implemented")
     }
     
+    /// Lets other classes retrieve tiles using `grid[coordinate]`.
     private (set) subscript(coordinate: Coordinate) -> HanziTile? {
         get {
             return coordinateToTile[coordinate]
@@ -64,6 +69,7 @@ class TileGrid: SKNode {
         refillGrid()
     }
     
+    /// Updates the mapping from coordinate to tile so that there are no gaps within any column.
     private func updateCoordinates() {
         for column in Coordinate.validColumns {
             for row in Coordinate.validRows {
@@ -88,6 +94,7 @@ class TileGrid: SKNode {
         return nil
     }
     
+    /// Lets it rain new tiles until all columns are full again.
     private func refillGrid() {
         for column in Coordinate.validColumns {
             var newTilesInColumn = 0

@@ -9,6 +9,8 @@
 import UIKit
 import SpriteKit
 
+/// This view controller displays a demo/tutorial, and lets the user pick a difficulty level before
+/// starting a game.
 class SettingsViewController: UIViewController, HanziLevelsPickerControllerDelegate {
     
     @IBOutlet weak var tutorialView: SKView!

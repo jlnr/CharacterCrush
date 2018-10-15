@@ -8,6 +8,8 @@
 
 import SpriteKit
 
+/// Similar to `GameScene`, but automatically adds and clears tiles to explain the game mechanics to
+/// new players.
 class TutorialScene: SKScene {
     
     private let grid: TileGrid
@@ -49,6 +51,8 @@ class TutorialScene: SKScene {
         }
     }
     
+    /// Selects the next tile based on the tone placement logic in `TutorialScene`.
+    /// If an error happens here, these two classes are likely out of sync.
     private func selectNextTile() {
         guard let selectionPath = selectionPath else { return }
         
@@ -57,7 +61,6 @@ class TutorialScene: SKScene {
             if !result {
                 fatalError("Logic bug in tutorial")
             }
-            
         } else {
             let result = selectionPath.tryToClear()
             if !result {

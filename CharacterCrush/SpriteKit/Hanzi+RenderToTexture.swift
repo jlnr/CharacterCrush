@@ -9,6 +9,7 @@
 import UIKit
 import SpriteKit
 
+/// Returns the contents of the given block as an SKTexture.
 fileprivate func renderToTexture(size: CGSize, block: () throws -> ()) rethrows -> SKTexture {
     UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
     defer { UIGraphicsEndImageContext() }
@@ -18,6 +19,7 @@ fileprivate func renderToTexture(size: CGSize, block: () throws -> ()) rethrows 
 
 fileprivate let hanziTextureSize: CGFloat = 64
 
+/// Text attributes for normal tiles.
 fileprivate let textAttributes: [NSAttributedString.Key: Any] = [
     .font: UIFont.systemFont(ofSize: hanziTextureSize * 0.75),
     .foregroundColor: UIColor.white,
@@ -31,6 +33,7 @@ fileprivate let jokerTextShadow: NSShadow = {
     return shadow
 }()
 
+/// Text attributes for "joker tiles" (破音字).
 fileprivate let jokerTextAttributes: [NSAttributedString.Key: Any] = [
     .font: UIFont.systemFont(ofSize: hanziTextureSize * 0.75),
     .foregroundColor: UIColor.white,
@@ -38,7 +41,8 @@ fileprivate let jokerTextAttributes: [NSAttributedString.Key: Any] = [
 ]
 
 extension Hanzi {
-    
+
+    /// Returns an `SKTexture` that contains this character.
     func asTexture() -> SKTexture {
         let size = CGSize(width: hanziTextureSize, height: hanziTextureSize)
         
@@ -56,15 +60,22 @@ extension Hanzi {
 
 fileprivate let toneTextures = [Hanzi.Tones: SKTexture]()
 
+/// Tone colors based on Pleco's color scheme, but it should be great to let the user pick their
+/// favorite color scheme in `SettingsViewController`.
 fileprivate let toneColors: [Hanzi.Tones: UIColor] = [
-    .first:  UIColor(red: 227/255.0, green: 0, blue: 0, alpha: 1),
-    .second: UIColor(red: 2/255.0, green: 179/255.0, blue: 28/255.0, alpha: 1),
-    .third:  UIColor(red: 21/255.0, green: 16/255.0, blue: 240/255.0, alpha: 1),
-    .fourth: UIColor(red: 137/255.0, green: 0, blue: 191/255.0, alpha: 1),
+    .first:  UIColor(rgb: 0xe30000),
+    .second: UIColor(rgb: 0x02b31c),
+    .third:  UIColor(rgb: 0x1510f0),
+    .fourth: UIColor(rgb: 0x8900bf),
 ]
 
 extension Hanzi.Tones {
     
+    /// Returns a color, and (if applicable) a texture that can be used to indicate the valid tones
+    /// for extending a `SelectionPath`.
+    /// The reason that this method does not always return an `SKTexture` is that
+    /// `SKShapeNode.strokeTexture` is buggy in the iOS simulator because it uses metal, and also
+    /// returning a color is easy and makes debugging easier except for "joker tiles".
     func matchingBackground() -> (UIColor, SKTexture?) {
         var colors = [UIColor]()
         let allTones: [Hanzi.Tones] = [.first, .second, .third, .fourth]
@@ -79,7 +90,7 @@ extension Hanzi.Tones {
         }
         
         if let texture = toneTextures[self] {
-            return (colors.first!, texture)
+            return (.white, texture)
         }
         
         let scale = 32
@@ -91,7 +102,7 @@ extension Hanzi.Tones {
             }
         }
         texture.filteringMode = .nearest
-        return (colors.first!, texture)
+        return (.white, texture)
     }
 
 }

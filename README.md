@@ -8,7 +8,7 @@ The app has not been released on the App Store yet.
 ![Demo](Assets/Demo.gif)
 
 Character Crush is a puzzle game with mechanics similar to popular mobile games e.g. [Cookie Cats](https://www.youtube.com/watch?v=iPxZIp0cbJE&t=1m10s).
-However, instead of connecting 3+ items of the same color, the player must connect 2+ Chinese characters with the same *tone*.
+However, instead of connecting items of the same color, the player must connect 3+ Chinese characters with the same *tone*.
 
 ![Connecting Tiles](Assets/Connecting.gif)
 

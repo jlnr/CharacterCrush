@@ -8,12 +8,14 @@
 
 import SpriteKit
 
-// MARK: - SelectionPath logic
-
+/// Manages and displays the path of characters that the user has currently selected.
 class SelectionPath: SKShapeNode {
     
-    static let minimumLengthToClear = 2
+    /// This is the minimum number of tiles that can be cleared in a row.
+    static let minimumLengthToClear = 3
     
+    /// The touch that started this `SelectionPath`.
+    /// Used for deciding whether a touch operation should affect this path.
     let touch: UITouch?
 
     var length: Int {
@@ -46,6 +48,7 @@ class SelectionPath: SKShapeNode {
         }
     }
     
+    /// Returns true if the given coordinate could be added to this path (and does so).
     func tryToExtend(to coordinate: Coordinate) -> Bool {
         guard coordinate.isWithinGrid,
             !coordinates.contains(coordinate),
@@ -62,6 +65,7 @@ class SelectionPath: SKShapeNode {
         return true
     }
     
+    /// Tries to backtrack to the given coordinate.
     func tryToBacktrack(to coordinate: Coordinate) {
         guard coordinates.count > 1,
             coordinates[coordinates.count - 2] == coordinate else { return }
@@ -71,6 +75,7 @@ class SelectionPath: SKShapeNode {
         updateAppearance()
     }
     
+    /// Returns true if the current path can be cleared (and does so).
     func tryToClear() -> Bool {
         guard coordinates.count >= SelectionPath.minimumLengthToClear else { return false }
         
@@ -78,6 +83,7 @@ class SelectionPath: SKShapeNode {
         return true
     }
     
+    /// The intersection of the possible tones of each character in this path.
     private var possibleTones: Hanzi.Tones {
         var tones = Hanzi.Tones.all
         for coordinate in coordinates {

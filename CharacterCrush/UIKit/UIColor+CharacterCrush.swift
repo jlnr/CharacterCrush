@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// App-specific utility extensions on `UIColor`.
 extension UIColor {
     
     convenience init(rgb: Int) {
@@ -17,14 +18,17 @@ extension UIColor {
         self.init(red: red, green: green, blue: blue, alpha: 1.0)
     }
     
+    /// The shade of green used in `PrettyButton`.
     class var brandGreen: UIColor {
         return UIColor(rgb: 0x64c701)
     }
     
+    /// The shade of red used as the base tint color for the app.
     class var brandRed: UIColor {
         return UIColor(rgb: 0xc80000)
     }
     
+    /// Returns a copy of this color that is somewhat darker.
     func darkened() -> UIColor {
         var hue: CGFloat = 0
         var saturation: CGFloat = 0

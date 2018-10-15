@@ -8,12 +8,14 @@
 
 import UIKit
 
+/// This protocol is used by `HanziLevelsPickerController` to notify `SettingsViewController` about
+/// an updated difficulty level selection, so it can update the characters in the demo/tutorial.
 @objc protocol HanziLevelsPickerControllerDelegate: class {
-    
     func selectedLevelDidChange()
-    
 }
 
+/// This controller class (but not a `UIViewController`) is responsible for managing the
+/// `UIPickerView` for choosing a difficulty level inside `SettingsViewController`.
 class HanziLevelsPickerController: NSObject, UIPickerViewDataSource, UIPickerViewDelegate {
 
     @IBOutlet weak var delegate: HanziLevelsPickerControllerDelegate!

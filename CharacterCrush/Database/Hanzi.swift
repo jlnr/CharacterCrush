@@ -8,45 +8,42 @@
 
 import Foundation
 
+/// A Chinese character that can appear in this game.
+/// All characters are defined in `HanziDatabase.swift`.
 struct Hanzi {
-    // The Chinese character, e.g. 好.
+    /// The Chinese character, e.g. "好".
     let character: Character
-    // Pinyin each tone, e.g. nil, nil, "hǎo", "hào".
+    /// Pinyin for the first tone, or nil.
     let firstTone: String?
+    /// Pinyin for the second tone, or nil.
     let secondTone: String?
+    /// Pinyin for the third tone, or nil.
     let thirdTone: String?
+    /// Pinyin for the fourth tone, or nil.
     let fourthTone: String?
 }
 
+// MARK: - Tones
+
 extension Hanzi {
+    /// An `OptionSet` that defines which tones a character can have.
     struct Tones: OptionSet, Hashable {
         let rawValue: Int
         
-        static let first  = Tones(rawValue: 1 << 0)
-        static let second = Tones(rawValue: 1 << 1)
-        static let third  = Tones(rawValue: 1 << 2)
-        static let fourth = Tones(rawValue: 1 << 3)
+        static func singleTone(_ tone: Int) -> Tones {
+            assert(tone >= 1 && tone <= 4)
+            return Tones(rawValue: 1 << (tone - 1))
+        }
+        
+        static let first  = singleTone(1)
+        static let second = singleTone(2)
+        static let third  = singleTone(3)
+        static let fourth = singleTone(4)
         
         static let all: Tones = [.first, .second, .third, .fourth]
     }
-    
-    func sharedTones(tones: Tones) -> Tones {
-        var sharedTones = tones
-        if firstTone == nil {
-            sharedTones.remove(.first)
-        }
-        if secondTone == nil {
-            sharedTones.remove(.second)
-        }
-        if thirdTone == nil {
-            sharedTones.remove(.third)
-        }
-        if fourthTone == nil {
-            sharedTones.remove(.fourth)
-        }
-        return sharedTones
-    }
-    
+
+    /// Returns true exactly if this Hanzi can be pronounced with the given tone (1...4).
     func hasTone(_ tone: Int) -> Bool {
         switch tone {
         case 1:
@@ -61,21 +58,20 @@ extension Hanzi {
             fatalError("Invalid tone number: \(tone)")
         }
     }
+
+    /// Returns the tones that this Hanzi has in common with the given tones (a set intersection).
+    func sharedTones(tones: Tones) -> Tones {
+        var sharedTones = tones
+        for tone in 1...4 {
+            if !hasTone(tone) {
+                sharedTones.remove(Tones.singleTone(tone))
+            }
+        }
+        return sharedTones
+    }
     
+    /// Returns true if this character has more than one pronunciation (i.e. it is a 破音字).
     var isJoker: Bool {
-        var tones = 0
-        if firstTone != nil {
-            tones += 1
-        }
-        if secondTone != nil {
-            tones += 1
-        }
-        if thirdTone != nil {
-            tones += 1
-        }
-        if fourthTone != nil {
-            tones += 1
-        }
-        return tones >= 2
+        return (1...4).filter { hasTone($0) }.count > 1
     }
 }

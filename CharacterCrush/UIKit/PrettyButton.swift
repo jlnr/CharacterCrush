@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// This button works like a normal `UIButton`, but has a more game-friendly styling.
 @IBDesignable
 class PrettyButton: UIButton {
     

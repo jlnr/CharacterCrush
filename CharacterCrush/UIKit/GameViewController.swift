@@ -10,8 +10,10 @@ import UIKit
 import SpriteKit
 import GameplayKit
 
-let secondsPerGame = 180
+let secondsPerGame = 210
 
+/// This `ViewController` displays a `GameScene` and lets it do its thing until the player has run
+/// out of time.
 class GameViewController: UIViewController, SKSceneDelegate {
 
     @IBOutlet weak var gameView: SKView!

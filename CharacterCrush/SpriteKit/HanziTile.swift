@@ -8,10 +8,13 @@
 
 import SpriteKit
 
+/// Instances of this class represent a tile on the game board (`TileGrid`).
+/// These tiles fall down based on SpriteKit's physics engine.
 class HanziTile: SKSpriteNode {
     
     let hanzi: Hanzi
     
+    /// Toggled when this tile enters of leaves a `SelectionPath`.
     var isHighlighted = false {
         didSet {
             updateBlendFactor()
@@ -21,6 +24,8 @@ class HanziTile: SKSpriteNode {
     init(hanzi: Hanzi, at coordinate: Coordinate) {
         self.hanzi = hanzi
         
+        // All tiles are rendered in white, but are usually blended with the color given here.
+        // i.e. Joker tiles are usually yellow, and normal tiles are usually black.
         super.init(texture: hanzi.asTexture(), color: (hanzi.isJoker ? .yellow : .black),
                    size: CGSize(width: tileSize, height: tileSize))
         updateBlendFactor()
@@ -43,6 +48,8 @@ class HanziTile: SKSpriteNode {
     }
     
     private func updateBlendFactor() {
+        // When tiles are selected, discard the blend color, and let the original (white) color
+        // shine through.
         self.colorBlendFactor = isHighlighted ? 0.0 : 1.0
     }
     
