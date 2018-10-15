@@ -1,9 +1,18 @@
-# Character Crush
+# ChinesePod App Challenge Entries
 
-## About
+This repository two iPhone/iPad app prototypes in a single Xcode project. 
 
-This is my app prototype for the [ChinesePod app challenge](https://chinesepod.app).
-The app has not been released on the App Store yet.
+Both prototype are written using the Swift language, and use no third-party code whatsoever.
+
+Simply download or clone this repository, open `CharacterCrush.pbxproj`, and run the app on an iPhone or iPad of your choice.
+
+(Note that some sound effects, and some visual effects do not work in the iPhone/iPad simulator.)
+
+Both prototypes are described in detail below.
+
+## Character Crush
+
+This is my first app prototype for the [ChinesePod app challenge](https://chinesepod.app).
 
 ![Demo](Assets/Demo.gif)
 
@@ -15,15 +24,7 @@ However, instead of connecting items of the same color, the player must connect 
 Selected characters are highlighted using [tone-specific colors](https://chinesepod.com/blog/2017/04/17/learn-chinese-tones-properly/) (see item 4, this game follows Pleco's color scheme).
 Characters with multiple tones (破音字) such as 中 (zhōng / zhòng) work like jokers, and can be used in a chain of either of their tones.
 
-## How to Play This Game
-
-This prototype is written using the Swift language and Apple's own SpriteKit frameworks, and it uses no third-party dependencies.
-
-Simply download or clone this repository, open `CharacterCrush.pbxproj`, and run the game on an iPhone or iPad of your choice.
-
-Note that some sound effects, and some visual effects (based on SpriteKit/Metal) do not work in the iPhone/iPad simulator.
-
-## Possible Integration with ChinesePod
+### Possible Integration with ChinesePod
 
 How would this app fit into the ChinesePod ecosystem?
 
@@ -31,21 +32,47 @@ How would this app fit into the ChinesePod ecosystem?
   Since [ChinesePod already has its own Pinyin pronunciation app](https://itunes.apple.com/us/app/pinyin-by-chinesepod/id833178097?mt=8), the game could use these higher-quality recordings.
 * In addition to the current HSK and TOCFL difficulty levels, the game could use precisely those characters that the user has learned on ChinesePod. 
 
-## Next Steps
+### Next Steps
 
 There is always more to do. Here are a few ideas that didn't make it in time:
 
-* Review the character database: am I missing any characters or tones?
+* Review the character database: Am I missing any characters or tones?
 * Discuss: How should we deal with the silent tone? Should we add a fifth color for them?
 * Play *all* pronunciations when selecting a character with multiple pronunciations, to aid the user in learning characters.
 * Online highscore list, e.g. using Apple's free GameCenter API.
-* Don't use Apple's system sound effects.
 * Remember the last selected difficulty level.
 * Support [other tone color schemes than Pleco's](http://laowaichinese.net/tone-colors-and-what-pleco-did-with-them.htm) in `Hanzi+RenderToTexture.swift`.
 * Replace SpriteKit (plain UIKit would do the trick).
   Its physics engine quickly drains users' battery and has been quite troublesome.
 * The game should actively avoid having the user get stuck with no moves left.
   Easiest solution: Refill the board with characters of the same tone when there are no moves left.
+
+## 相似字! Which one is it?
+
+This is my second app prototype for the [ChinesePod app challenge](https://chinesepod.app).
+
+![Quiz](Assets/Quiz.png)
+
+This prototype implements a very simple quiz game where the player has to pick one of several similar looking characters.
+
+### Possible Integration with ChinesePod
+
+How would this app fit into the ChinesePod ecosystem?
+
+* The app could use example sentences from previous podcast episodes.
+* Similarly, character definitions could be imported from the ChinesePod archives, instead of maintaining a dictionary in `Questions.java.
+* The user should only be shown questions for characters that they have already learned.
+* It would be convenient to create new flashcards from the "Answer" screen.
+  (The buttons are already there, but don't do anything.)
+
+### Next Steps
+
+* Replace the current, boring UI with a more exciting interface, similar to Character Crush.
+* Fix layout when showing three answers on iPhone (looks good on iPad).
+* I have added a lot of similar-looking characters to [`Questions.swift`](WhichOne/Questions.swift).
+  However, there are only six (terrible) example sentences right now.
+  This app desperately needs more questions, and it should only ever ask ~10 questions in one setting.
+* Support (data) for Simplified Chinese.
 
 ## License
 

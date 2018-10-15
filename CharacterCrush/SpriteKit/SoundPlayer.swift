@@ -17,7 +17,7 @@ class SoundPlayer {
     var tickID: SystemSoundID = 0
     var successID: SystemSoundID = 0
     
-    private let synthesizer = AVSpeechSynthesizer()
+    private lazy var synthesizer = AVSpeechSynthesizer()
     private let voice: AVSpeechSynthesisVoice?
     
     init(voiceLanguage: String) {

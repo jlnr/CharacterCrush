@@ -36,8 +36,6 @@ class PrettyButton: UIButton {
     }
     
     func makePretty() {
-        titleLabel!.font = UIFont.preferredFont(forTextStyle: .headline)
-
         layer.borderColor = UIColor.brandGreen.cgColor
         layer.borderWidth = 2
         layer.cornerRadius = 15

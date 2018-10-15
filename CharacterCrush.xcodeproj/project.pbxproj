@@ -30,6 +30,9 @@
 		D4CFF4E0216CA09700162394 /* UIColor+CharacterCrush.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CFF4DF216CA09700162394 /* UIColor+CharacterCrush.swift */; };
 		D4CFF4E2216CB2CF00162394 /* HanziDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CFF4E1216CB2CF00162394 /* HanziDatabase.swift */; };
 		D4CFF4E4216D160700162394 /* HanziLevels.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CFF4E3216D160700162394 /* HanziLevels.swift */; };
+		D4EFABA12174B1CC00BC6D23 /* QuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EFABA02174B1CC00BC6D23 /* QuestionViewController.swift */; };
+		D4EFABA52174B83E00BC6D23 /* Questions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EFABA42174B83E00BC6D23 /* Questions.swift */; };
+		D4EFABA721754C4B00BC6D23 /* AnswerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EFABA621754C4B00BC6D23 /* AnswerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +74,9 @@
 		D4CFF4DF216CA09700162394 /* UIColor+CharacterCrush.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+CharacterCrush.swift"; sourceTree = "<group>"; };
 		D4CFF4E1216CB2CF00162394 /* HanziDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HanziDatabase.swift; sourceTree = "<group>"; };
 		D4CFF4E3216D160700162394 /* HanziLevels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HanziLevels.swift; sourceTree = "<group>"; };
+		D4EFABA02174B1CC00BC6D23 /* QuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionViewController.swift; sourceTree = "<group>"; };
+		D4EFABA42174B83E00BC6D23 /* Questions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Questions.swift; sourceTree = "<group>"; };
+		D4EFABA621754C4B00BC6D23 /* AnswerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnswerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +144,7 @@
 			children = (
 				D42B695B21734D6500D28293 /* README.md */,
 				D4CFF4B2216C921C00162394 /* CharacterCrush */,
+				D4EFAB9F2174B1B600BC6D23 /* WhichOne */,
 				D4CFF4CD216C921D00162394 /* CharacterCrushTests */,
 				D4CFF4B1216C921C00162394 /* Products */,
 			);
@@ -171,6 +178,16 @@
 				D4CFF4D0216C921D00162394 /* Info.plist */,
 			);
 			path = CharacterCrushTests;
+			sourceTree = "<group>";
+		};
+		D4EFAB9F2174B1B600BC6D23 /* WhichOne */ = {
+			isa = PBXGroup;
+			children = (
+				D4EFABA621754C4B00BC6D23 /* AnswerViewController.swift */,
+				D4EFABA02174B1CC00BC6D23 /* QuestionViewController.swift */,
+				D4EFABA42174B83E00BC6D23 /* Questions.swift */,
+			);
+			path = WhichOne;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -285,10 +302,13 @@
 				D42B695021721C1500D28293 /* SelectionPath.swift in Sources */,
 				D4CFF4BC216C921C00162394 /* GameViewController.swift in Sources */,
 				D42B695F2173B58F00D28293 /* TutorialScene.swift in Sources */,
+				D4EFABA721754C4B00BC6D23 /* AnswerViewController.swift in Sources */,
 				D4CFF4B4216C921C00162394 /* AppDelegate.swift in Sources */,
 				D4CFF4E0216CA09700162394 /* UIColor+CharacterCrush.swift in Sources */,
 				D42B69612173DB9700D28293 /* NextTileGenerator.swift in Sources */,
 				D42B695D2173B0F400D28293 /* SoundPlayer.swift in Sources */,
+				D4EFABA12174B1CC00BC6D23 /* QuestionViewController.swift in Sources */,
+				D4EFABA52174B83E00BC6D23 /* Questions.swift in Sources */,
 				D42B69522172228400D28293 /* Coordinate.swift in Sources */,
 				D4CFF4DC216C9A4400162394 /* PrettyButton.swift in Sources */,
 				D4CFF4E2216CB2CF00162394 /* HanziDatabase.swift in Sources */,
