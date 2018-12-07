@@ -32,6 +32,9 @@ let hanziDefinitions: [Character: HanziDefinition] = {
     definitions["己"] = HanziDefinition(pinyin: "jǐ",     translation: "oneself, personal")
     definitions["已"] = HanziDefinition(pinyin: "yǐ",     translation: "already, cease, end")
     
+    definitions["卸"] = HanziDefinition(pinyin: "tbd",    translation: "tbd")
+    definitions["御"] = HanziDefinition(pinyin: "tbd",    translation: "tbd")
+    
     definitions["牽"] = HanziDefinition(pinyin: "tbd",    translation: "tbd")
     definitions["舉"] = HanziDefinition(pinyin: "tbd",    translation: "tbd")
     
