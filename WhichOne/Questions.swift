@@ -271,6 +271,9 @@ let hanziDefinitions: [Character: HanziDefinition] = {
     definitions["喪"] = HanziDefinition(pinyin: "tbd",    translation: "tbd")
     definitions["衷"] = HanziDefinition(pinyin: "tbd",    translation: "tbd")
 
+    definitions["徵"] = HanziDefinition(pinyin: "tbd",    translation: "tbd")
+    definitions["微"] = HanziDefinition(pinyin: "tbd",    translation: "tbd")
+
     definitions["積"] = HanziDefinition(pinyin: "tbd",    translation: "tbd")
     definitions["績"] = HanziDefinition(pinyin: "tbd",    translation: "tbd")
 
