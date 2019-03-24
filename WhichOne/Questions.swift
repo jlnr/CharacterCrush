@@ -100,8 +100,15 @@ let hanziDefinitions: [Character: HanziDefinition] = {
     definitions["均"] = HanziDefinition(pinyin: "tbd",    translation: "tbd")
     definitions["句"] = HanziDefinition(pinyin: "tbd",    translation: "tbd")
 
+    definitions["期"] = HanziDefinition(pinyin: "tbd",    translation: "tbd")
+    definitions["斯"] = HanziDefinition(pinyin: "tbd",    translation: "tbd")
+    definitions["欺"] = HanziDefinition(pinyin: "tbd",    translation: "tbd")
+    
     definitions["裏"] = HanziDefinition(pinyin: "tbd",    translation: "tbd")
     definitions["裹"] = HanziDefinition(pinyin: "tbd",    translation: "tbd")
+
+    definitions["施"] = HanziDefinition(pinyin: "tbd",    translation: "tbd")
+    definitions["拖"] = HanziDefinition(pinyin: "tbd",    translation: "tbd")
 
     definitions["插"] = HanziDefinition(pinyin: "tbd",    translation: "tbd")
     definitions["抽"] = HanziDefinition(pinyin: "tbd",    translation: "tbd")
@@ -160,6 +167,9 @@ let hanziDefinitions: [Character: HanziDefinition] = {
 
     definitions["產"] = HanziDefinition(pinyin: "tbd",    translation: "tbd")
     definitions["展"] = HanziDefinition(pinyin: "tbd",    translation: "tbd")
+
+    definitions["持"] = HanziDefinition(pinyin: "tbd",    translation: "tbd")
+    definitions["特"] = HanziDefinition(pinyin: "tbd",    translation: "tbd")
 
     definitions["主"] = HanziDefinition(pinyin: "tbd",    translation: "tbd")
     definitions["注"] = HanziDefinition(pinyin: "tbd",    translation: "tbd")
@@ -324,6 +334,7 @@ let hanziDefinitions: [Character: HanziDefinition] = {
     definitions["深"] = HanziDefinition(pinyin: "tbd",    translation: "tbd")
 
     definitions["即"] = HanziDefinition(pinyin: "tbd",    translation: "tbd")
+    definitions["既"] = HanziDefinition(pinyin: "tbd",    translation: "tbd")
     definitions["朗"] = HanziDefinition(pinyin: "tbd",    translation: "tbd")
 
     definitions["齋"] = HanziDefinition(pinyin: "tbd",    translation: "tbd")
