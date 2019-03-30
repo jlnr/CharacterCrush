@@ -32,6 +32,16 @@ let hanziDefinitions: [Character: HanziDefinition] = {
     definitions["己"] = HanziDefinition(pinyin: "jǐ",     translation: "oneself, personal")
     definitions["已"] = HanziDefinition(pinyin: "yǐ",     translation: "already, cease, end")
     
+    definitions["染"] = HanziDefinition(pinyin: "tbd",    translation: "tbd")
+    definitions["梁"] = HanziDefinition(pinyin: "tbd",    translation: "tbd")
+    definitions["糧"] = HanziDefinition(pinyin: "tbd",    translation: "tbd")
+
+    definitions["衡"] = HanziDefinition(pinyin: "tbd",    translation: "tbd")
+    definitions["恆"] = HanziDefinition(pinyin: "tbd",    translation: "tbd")
+    
+    definitions["決"] = HanziDefinition(pinyin: "tbd",    translation: "tbd")
+    definitions["泱"] = HanziDefinition(pinyin: "tbd",    translation: "tbd")
+    
     definitions["卸"] = HanziDefinition(pinyin: "tbd",    translation: "tbd")
     definitions["御"] = HanziDefinition(pinyin: "tbd",    translation: "tbd")
     
