@@ -75,6 +75,12 @@ let hanziDefinitions: [Character: HanziDefinition] = {
     definitions["熱"] = HanziDefinition(pinyin: "tbd",    translation: "tbd")
     definitions["熟"] = HanziDefinition(pinyin: "tbd",    translation: "tbd")
 
+    definitions["遷"] = HanziDefinition(pinyin: "tbd",    translation: "tbd")
+    definitions["遣"] = HanziDefinition(pinyin: "tbd",    translation: "tbd")
+
+    definitions["捐"] = HanziDefinition(pinyin: "tbd",    translation: "tbd")
+    definitions["損"] = HanziDefinition(pinyin: "tbd",    translation: "tbd")
+
     definitions["搬"] = HanziDefinition(pinyin: "tbd",    translation: "tbd")
     definitions["辦"] = HanziDefinition(pinyin: "tbd",    translation: "tbd")
 
