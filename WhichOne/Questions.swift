@@ -507,7 +507,7 @@ let hanziDefinitions: [Character: HanziDefinition] = {
     definitions["科"] = HanziDefinition(pinyin: "tbd",    translation: "tbd")
     definitions["料"] = HanziDefinition(pinyin: "tbd",    translation: "tbd")
 
-    // more: 遨邀 繁擊 摧攜 船般 ...
+    // more: 遨邀 繁擊 摧攜 船般 殼穀...
 
     return definitions
 }()
